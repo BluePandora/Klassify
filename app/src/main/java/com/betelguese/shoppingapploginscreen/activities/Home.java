@@ -96,7 +96,7 @@ public class Home extends ActionBarActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
         //menu.findItem(R.id.item_share_fb).setVisible(!drawerOpen);
         //menu.findItem(R.id.item_share_tw).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
