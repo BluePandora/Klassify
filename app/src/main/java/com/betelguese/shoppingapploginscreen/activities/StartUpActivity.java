@@ -17,20 +17,10 @@ import com.betelguese.shoppingapploginscreen.fragments.StartUpSlidePageFragment;
  */
 public class StartUpActivity extends ActionBarActivity {
 
-    /**
-     * The number of pages (wizard steps) to show in this demo.
-     */
     private static final int NUM_PAGES = 4;
 
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
     private ViewPager mPager;
 
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
     private PagerAdapter mPagerAdapter;
 
     @Override
@@ -42,10 +32,6 @@ public class StartUpActivity extends ActionBarActivity {
         mPager.setAdapter(mPagerAdapter);
     }
 
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
