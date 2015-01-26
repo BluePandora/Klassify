@@ -9,9 +9,10 @@
     <string name="drawer_close">Close navigation drawer</string>
 
     <string-array name="nav_array">
-        <item>Profile</item>
-        <item>Change Email</item>
-        <item>Change Password</item>
+        <item>Explore</item>
+        <item>Favourites</item>
+        <item>Cart</item>
+        <item>Settings</item>
         <item>Logout</item>
     </string-array>
 </resources>

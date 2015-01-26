@@ -4,11 +4,11 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Main theme colors -->
         <!--  color for the app bar  -->
-        <item name="colorPrimary">@color/Primary_Blue_500</item>
+        <item name="colorPrimary">@color/Primary_Blue_400</item>
         <!--  color for the status bar -->
-        <item name="colorPrimaryDark">@color/Primary_Blue_700</item>
+        <item name="colorPrimaryDark">@color/Primary_Blue_600</item>
         <!--   color for the check box and UI field -->
-        <item name="colorAccent">@color/Primary_Blue_500</item>
+        <item name="colorAccent">@color/Primary_Blue_400</item>
     </style>
 
 </resources>

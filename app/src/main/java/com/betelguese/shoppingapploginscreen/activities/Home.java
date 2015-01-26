@@ -41,6 +41,7 @@ public class Home extends ActionBarActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mTitles;
+    private TextView fullName, email;
 
     public static boolean active = false;
 
@@ -55,7 +56,10 @@ public class Home extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         View header = getLayoutInflater().inflate(R.layout.account, null);
-        ((TextView) header.findViewById(R.id.title)).setText("Ashraful " + "Islam");
+        fullName = (TextView) header.findViewById(R.id.title);
+        email = (TextView) header.findViewById(R.id.email);
+        fullName.setText("Ashraful " + "Islam");
+        email.setText("ashrafulcse.sust@gmail.com");
         mDrawerList.addHeaderView(header, mTitle, false);
         // set a custom shadow that overlays the main content when the drawer
         // opens
@@ -136,17 +140,13 @@ public class Home extends ActionBarActivity {
     private void selectItem(int position) {
         if (position != 0) {
             // update the main content by replacing fragments
-
             Fragment fragment = chooseFragment(position);
-            if (position == 1) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, mTitles[position - 1]).commit();
-
-                // update selected item and title, then close the drawer
-                mDrawerList.setItemChecked(position, true);
-                mDrawerLayout.closeDrawer(mDrawerList);
-                setTitle(mTitles[position - 1]);
-            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, mTitles[position - 1]).commit();
+            // update selected item and title, then close the drawer
+            mDrawerList.setItemChecked(position, true);
+            mDrawerLayout.closeDrawer(mDrawerList);
+            setTitle(mTitles[position - 1]);
         }
 
     }
