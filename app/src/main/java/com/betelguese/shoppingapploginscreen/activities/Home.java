@@ -1,6 +1,5 @@
 package com.betelguese.shoppingapploginscreen.activities;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,20 +10,20 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.droider.bdemarket.Config;
-import com.droider.bdemarket.MyActionBarDrawerToggle;
-import com.droider.bdemarket.R;
-import com.droider.bdemarket.adapter.NavAdapter;
-import com.droider.bdemarket.fragments.BaseFragment;
-import com.droider.bdemarket.fragments.ProfileFragment;
-import com.droider.bdemarket.utils.Constants;
+import com.betelguese.shoppingapploginscreen.R;
+import com.betelguese.shoppingapploginscreen.appdata.MyActionBarDrawerToggle;
+import com.betelguese.shoppingapploginscreen.appdata.NavAdapter;
+import com.betelguese.shoppingapploginscreen.fragments.BaseFragment;
+import com.betelguese.shoppingapploginscreen.fragments.LogInFragment;
+import com.betelguese.shoppingapploginscreen.fragments.SignUpFragment;
+import com.betelguese.shoppingapploginscreen.fragments.StartUpSlidePageFragment;
+import com.betelguese.shoppingapploginscreen.utils.Config;
 
 import java.util.List;
 
@@ -56,7 +55,7 @@ public class Home extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         View header = getLayoutInflater().inflate(R.layout.account, null);
-        ((TextView) header.findViewById(R.id.title)).setText(Constants.first_name + " " + Constants.last_name);
+        ((TextView) header.findViewById(R.id.title)).setText("Ashraful " + "Islam");
         mDrawerList.addHeaderView(header, mTitle, false);
         // set a custom shadow that overlays the main content when the drawer
         // opens
@@ -88,8 +87,8 @@ public class Home extends ActionBarActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        //MenuInflater inflater = getMenuInflater();
+        //inflater.inflate(R.menu.main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -98,8 +97,8 @@ public class Home extends ActionBarActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.item_share_fb).setVisible(!drawerOpen);
-        menu.findItem(R.id.item_share_tw).setVisible(!drawerOpen);
+        //menu.findItem(R.id.item_share_fb).setVisible(!drawerOpen);
+        //menu.findItem(R.id.item_share_tw).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -112,16 +111,16 @@ public class Home extends ActionBarActivity {
         }
         // Handle action buttons
         switch (item.getItemId()) {
-            case R.id.item_share_fb:
-                Intent intent = new Intent(BDEmarket.this,ShareActivity.class);
-                intent.putExtra("type","fb");
-                startActivity(intent);
-                return true;
-            case R.id.item_share_tw:
-                intent = new Intent(BDEmarket.this,ShareActivity.class);
-                intent.putExtra("type","tw");
-                startActivity(intent);
-                return true;
+//            case R.id.item_share_fb:
+//                Intent intent = new Intent(BDEmarket.this, ShareActivity.class);
+//                intent.putExtra("type", "fb");
+//                startActivity(intent);
+//                return true;
+//            case R.id.item_share_tw:
+//                intent = new Intent(BDEmarket.this, ShareActivity.class);
+//                intent.putExtra("type", "tw");
+//                startActivity(intent);
+//                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -156,21 +155,20 @@ public class Home extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 1:
-                fragment = new ProfileFragment();
+                fragment = new LogInFragment();
                 setArgument(fragment, position);
                 break;
             case 2:
-                Intent intent = new Intent(BDEmarket.this, ChangeEmailActivity.class);
-                startActivity(intent);
+                fragment = new SignUpFragment();
+                setArgument(fragment, position);
                 break;
             case 3:
-                intent = new Intent(BDEmarket.this, ChangePasswordActivity.class);
-                startActivity(intent);
+                fragment = new StartUpSlidePageFragment();
+                setArgument(fragment, position);
                 break;
             case 4:
-                intent = new Intent(BDEmarket.this, LogInActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                fragment = new LogInFragment();
+                setArgument(fragment, position);
                 break;
             default:
                 fragment = new BaseFragment();
