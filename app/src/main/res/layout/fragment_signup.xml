@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ecedef"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dummy_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/shoppers_splash"
+                android:tint="#00bbd2" />
+
+            <LinearLayout
+                android:id="@+id/info_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dummy_icon"
+                android:layout_marginTop="30dp"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <com.widget.CustomEditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/abc_edit_text_material"
+                    android:hint="Email" />
+
+                <com.widget.CustomEditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/abc_edit_text_material"
+                    android:hint="User Name" />
+
+                <com.widget.CustomEditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/abc_edit_text_material"
+                    android:hint="Password" />
+
+                <com.widget.CustomEditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/abc_edit_text_material"
+                    android:hint="Confirm Password" />
+            </LinearLayout>
+
+            <com.widget.CustomButton
+                android:id="@+id/sign_up_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/info_layout"
+                android:background="@drawable/blue_holo_button"
+                android:text="SiGN UP"
+                android:textColor="#FaFaFa" />
+
+            <com.widget.CustomTextView
+                android:id="@+id/dummy_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sign_up_button"
+                android:layout_margin="5dip"
+                android:gravity="center"
+                android:text="OR YOU CAN SIGN UP WITH"
+                android:textColor="#2a2a2a"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dummy_text"
+                android:orientation="horizontal">
+
+                <com.widget.CustomButton
+                    android:id="@+id/facebook_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/info_layout"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/facebook_button"
+                    android:padding="10dp"
+                    android:text="FACEBOOK"
+                    android:textColor="#FAFAFA" />
+
+                <com.widget.CustomButton
+                    android:id="@+id/google_plus_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/info_layout"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/google_plus_button"
+                    android:padding="10dp"
+                    android:text="GOOGLE+"
+                    android:textColor="#FAFAFA" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>
