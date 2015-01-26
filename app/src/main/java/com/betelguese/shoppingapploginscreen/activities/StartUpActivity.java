@@ -12,9 +12,7 @@ import com.betelguese.shoppingapploginscreen.R;
 import com.betelguese.shoppingapploginscreen.fragments.LogInFragment;
 import com.betelguese.shoppingapploginscreen.fragments.StartUpSlidePageFragment;
 
-/**
- * Created by tuman on 25/1/2015.
- */
+
 public class StartUpActivity extends ActionBarActivity {
 
     private static final int NUM_PAGES = 4;
