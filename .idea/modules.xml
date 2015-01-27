@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ShoppingAppLogInScreen.iml" filepath="$PROJECT_DIR$/ShoppingAppLogInScreen.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cwc-sample-project.iml" filepath="$PROJECT_DIR$/cwc-sample-project.iml" />
     </modules>
   </component>
 </project>
