@@ -25,7 +25,7 @@ public class LogInFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (rootView == null) {
-            rootView = inflater.inflate(R.layout.product_detail, container, false);
+            rootView = inflater.inflate(R.layout.fragment_log_in, container, false);
         }
         return rootView;
     }
