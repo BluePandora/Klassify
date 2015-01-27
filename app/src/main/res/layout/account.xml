@@ -2,7 +2,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/colorPrimary"
+                android:background="?attr/colorPrimaryDark"
                 android:minHeight="100dp">
 
     <com.widget.CircularImageView
@@ -15,11 +15,11 @@
         android:src="@drawable/person"
         app:civ_border="true"
         app:civ_border_color="#FFFFFFFF"
-        app:civ_border_width="4dp"
+        app:civ_border_width="2dp"
         app:civ_selector="true"
         app:civ_selector_color="#4403a9f4"
         app:civ_selector_stroke_color="#aa5677fc"
-        app:civ_selector_stroke_width="4dp"
+        app:civ_selector_stroke_width="2dp"
         app:civ_shadow="true"/>
 
     <TextView

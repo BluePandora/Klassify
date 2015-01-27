@@ -49,4 +49,8 @@ public class NavAdapter extends BaseAdapter {
         title.setText(titles[position]);
         return v;
     }
+
+    public String getTag(int position) {
+        return titles[position];
+    }
 }

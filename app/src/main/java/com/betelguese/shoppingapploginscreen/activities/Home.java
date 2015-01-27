@@ -1,15 +1,20 @@
 package com.betelguese.shoppingapploginscreen.activities;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,10 +25,9 @@ import com.betelguese.shoppingapploginscreen.R;
 import com.betelguese.shoppingapploginscreen.appdata.MyActionBarDrawerToggle;
 import com.betelguese.shoppingapploginscreen.appdata.NavAdapter;
 import com.betelguese.shoppingapploginscreen.fragments.BaseFragment;
-import com.betelguese.shoppingapploginscreen.fragments.LogInFragment;
-import com.betelguese.shoppingapploginscreen.fragments.SignUpFragment;
-import com.betelguese.shoppingapploginscreen.fragments.StartUpSlidePageFragment;
+import com.betelguese.shoppingapploginscreen.fragments.StaggeredGridFragment;
 import com.betelguese.shoppingapploginscreen.utils.Config;
+import com.betelguese.shoppingapploginscreen.utils.OnMessageListener;
 
 import java.util.List;
 
@@ -33,7 +37,7 @@ import java.util.List;
  * Shahjalal University of Science and Technology,Sylhet
  */
 
-public class Home extends ActionBarActivity {
+public class Home extends ActionBarActivity implements OnMessageListener {
     public ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -91,18 +95,20 @@ public class Home extends ActionBarActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        //MenuInflater inflater = getMenuInflater();
-        //inflater.inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.btn_action_search));
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        return true;
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content
-        //boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        //menu.findItem(R.id.item_share_fb).setVisible(!drawerOpen);
-        //menu.findItem(R.id.item_share_tw).setVisible(!drawerOpen);
+        //If the nav drawer is open, hide action items related to the content
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -115,16 +121,8 @@ public class Home extends ActionBarActivity {
         }
         // Handle action buttons
         switch (item.getItemId()) {
-//            case R.id.item_share_fb:
-//                Intent intent = new Intent(BDEmarket.this, ShareActivity.class);
-//                intent.putExtra("type", "fb");
-//                startActivity(intent);
-//                return true;
-//            case R.id.item_share_tw:
-//                intent = new Intent(BDEmarket.this, ShareActivity.class);
-//                intent.putExtra("type", "tw");
-//                startActivity(intent);
-//                return true;
+            case R.id.action_settings:
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -155,24 +153,24 @@ public class Home extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 1:
-                fragment = new LogInFragment();
-                setArgument(fragment, position);
+                fragment = new BaseFragment();
+                setArgument(fragment, position - 1);
                 break;
             case 2:
-                fragment = new SignUpFragment();
-                setArgument(fragment, position);
+                fragment = new StaggeredGridFragment();
+                setArgument(fragment, position - 1);
                 break;
             case 3:
-                fragment = new StartUpSlidePageFragment();
-                setArgument(fragment, position);
+                fragment = new BaseFragment();
+                setArgument(fragment, position - 1);
                 break;
             case 4:
-                fragment = new LogInFragment();
-                setArgument(fragment, position);
+                fragment = new BaseFragment();
+                setArgument(fragment, position - 1);
                 break;
             default:
                 fragment = new BaseFragment();
-                setArgument(fragment, position);
+                setArgument(fragment, position - 1);
         }
         return fragment;
     }
@@ -231,6 +229,11 @@ public class Home extends ActionBarActivity {
                 return fragment;
         }
         return null;
+    }
+
+    @Override
+    public void onReceiveMessage(Bundle bundle) {
+
     }
 
     /* The click listener for ListView in the navigation drawer */
