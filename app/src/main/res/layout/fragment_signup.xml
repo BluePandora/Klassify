@@ -35,15 +35,23 @@
                 <com.widget.CustomEditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/abc_edit_text_material"
-                    android:hint="Email" />
+                    android:hint="First Name" />
 
                 <com.widget.CustomEditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/abc_edit_text_material"
-                    android:hint="User Name" />
+                    android:hint="Last Name" />
+
+                <com.widget.CustomEditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/abc_edit_text_material"
+                    android:hint="Email" />
 
                 <com.widget.CustomEditText
                     android:layout_width="fill_parent"
