@@ -45,7 +45,7 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
     private final String SAVE_VALUE_KEY = "save";
     private int mLastFirstVisibleItem;
     private ActionBar actionBar;
-    private OnMessageListener listerner;
+    private OnMessageListener listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup c, Bundle save) {
@@ -86,7 +86,7 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
         mGridView.addFooterView(footer);
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
         swipeContainer.setOnRefreshListener(this);
-        adapter = new ProductAdapter(getActivity(), progressBar, empty, navPosition, swipeContainer, listerner);
+        adapter = new ProductAdapter(getActivity(), progressBar, empty, navPosition, swipeContainer, listener);
         mGridView.setAdapter(adapter);
         mGridView.setOnScrollListener(this);
         mGridView.setOnItemClickListener(this);
@@ -131,23 +131,15 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        Log.d(TAG, "onScroll firstVisibleItem:" + firstVisibleItem +
-                " visibleItemCount:" + visibleItemCount +
-                " totalItemCount:" + totalItemCount);
         // our handling
         if (!adapter.mHasRequestedMore) {
             int lastInScreen = firstVisibleItem + visibleItemCount;
             if (lastInScreen >= totalItemCount) {
-                Log.d(TAG, "onScroll lastInScreen - so load more");
                 adapter.mHasRequestedMore = true;
                 onLoadMoreItems();
             }
         }
-    }
 
-
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
         if (view.getId() == mGridView.getId()) {
             int currentFirstVisibleItem = mGridView.getFirstVisiblePosition();
             if (currentFirstVisibleItem > mLastFirstVisibleItem) {
@@ -163,11 +155,16 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
         }
     }
 
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            listerner = (OnMessageListener) activity;
+            listener = (OnMessageListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnMessageListener");
         }
@@ -175,8 +172,8 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
 
     @Override
     public void onReceiveMessage(Bundle bundle) {
-        if (bundle != null && listerner != null) {
-            listerner.onReceiveMessage(bundle);
+        if (bundle != null && listener != null) {
+            listener.onReceiveMessage(bundle);
         }
     }
 

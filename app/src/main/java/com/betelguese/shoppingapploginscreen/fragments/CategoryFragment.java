@@ -1,5 +1,6 @@
 package com.betelguese.shoppingapploginscreen.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -62,7 +63,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), ProductListActivity.class);
-        intent.putExtra(Config.ARG_TAG,adapter.getTag(position));
+        intent.putExtra(Config.ARG_TAG, adapter.getTag(position));
         startActivity(intent);
     }
 
@@ -106,5 +107,15 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            ((ActionBarActivity) activity).getSupportActionBar().show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

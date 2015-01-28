@@ -25,7 +25,6 @@ import com.betelguese.shoppingapploginscreen.R;
 import com.betelguese.shoppingapploginscreen.appdata.MyActionBarDrawerToggle;
 import com.betelguese.shoppingapploginscreen.appdata.NavAdapter;
 import com.betelguese.shoppingapploginscreen.fragments.BaseFragment;
-import com.betelguese.shoppingapploginscreen.fragments.StaggeredGridFragment;
 import com.betelguese.shoppingapploginscreen.utils.Config;
 import com.betelguese.shoppingapploginscreen.utils.OnMessageListener;
 
@@ -157,7 +156,7 @@ public class Home extends ActionBarActivity implements OnMessageListener {
                 setArgument(fragment, position - 1);
                 break;
             case 2:
-                fragment = new StaggeredGridFragment();
+                fragment = new BaseFragment();
                 setArgument(fragment, position - 1);
                 break;
             case 3:
