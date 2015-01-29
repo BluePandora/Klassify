@@ -5,4 +5,4 @@
     <item android:state_focused="true" android:drawable="@color/background_tab_pressed"/>
     <item android:drawable="@android:color/transparent"/>
 
-</selector><!-- From: file:/J:/OneDrive/CWCProject/library/res/drawable/background_tab.xml --><!-- From: file:/J:/OneDrive/CWCProject/library/build/intermediates/bundles/debug/res/drawable/background_tab.xml -->
+</selector><!-- From: file:/E:/android/CWC_Simple_Project/library/res/drawable/background_tab.xml --><!-- From: file:/E:/android/CWC_Simple_Project/library/build/intermediates/bundles/debug/res/drawable/background_tab.xml -->
