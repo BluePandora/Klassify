@@ -1,7 +1,6 @@
 package com.betelguese.klassify.fragments;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,17 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.betelguese.klassify.R;
-import com.betelguese.klassify.activities.CategoryHome;
-import com.betelguese.klassify.activities.ProductListActivity;
-import com.betelguese.klassify.appdata.Category;
-import com.betelguese.klassify.appdata.CategoryAdapter;
-import com.betelguese.klassify.appdata.CategoryManager;
-import com.betelguese.klassify.appdata.NavAdapter;
 import com.betelguese.klassify.appdata.Product;
 import com.betelguese.klassify.appdata.ProductAdapter;
 import com.betelguese.klassify.appdata.ProductManager;
@@ -40,32 +32,34 @@ import java.util.ArrayList;
  * Shahjalal University of Science and Technology,Sylhet
  */
 
-public class CategoryFragment extends Fragment implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, SwipeRefreshLayout.OnRefreshListener {
+public class CategoryBaseTabFragment extends Fragment implements AbsListView.OnScrollListener, AbsListView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, OnMessageListener {
     private final String TAG = "Ashraful";
-    private CategoryAdapter adapter;
-    private ListView listView;
+    private ProductAdapter adapter;
+    private StaggeredGridView mGridView;
     private String tag;
     private int navPosition;
+    private int howMany = 25;
+    private int min = 6;
     private SwipeRefreshLayout swipeContainer;
+    private String url;
     private final String SAVE_VALUE_KEY = "save";
     private int mLastFirstVisibleItem;
     private ActionBar actionBar;
     private OnMessageListener listener;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup c, Bundle save) {
-        View v = inflater.inflate(R.layout.category_layout, c, false);
+        View v = inflater.inflate(R.layout.product_list_layout, c, false);
         initView(v, save);
         if (save != null) {
             adapter.initMore();
-            ArrayList<Category> categories = save.getParcelableArrayList(SAVE_VALUE_KEY);
-            if (categories == null)
-                categories = new ArrayList<Category>();
-            adapter.setData(categories);
+            ArrayList<Product> news = save.getParcelableArrayList(SAVE_VALUE_KEY);
+            if (news == null)
+                news = new ArrayList<Product>();
+            adapter.setData(news);
             adapter.invalidate();
         } else {
-            displayNews(Config.TASK_START);
+            displayNews(-1, Config.TASK_START);
         }
         return v;
     }
@@ -79,39 +73,54 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
 
     private void initView(View v, Bundle save) {
         actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+        url = getResources().getString(R.string.url);
         navPosition = getArguments().getInt(Config.ARG_POSITION);
         if (tag == null)
             tag = getArguments().getString(Config.ARG_TAG);
         SwipeRefreshLayout empty = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_empty);
         ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.load);
-        listView = (ListView) v.findViewById(R.id.list);
+        mGridView = (StaggeredGridView) v.findViewById(R.id.list);
+        LayoutInflater layoutInflater = getLayoutInflater(save);
+
+        View footer = layoutInflater.inflate(R.layout.list_item_header_footer, null);
+        mGridView.addFooterView(footer);
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
         swipeContainer.setOnRefreshListener(this);
-        adapter = new CategoryAdapter(getActivity(), progressBar, empty, navPosition, swipeContainer, listener);
-        listView.setAdapter(adapter);
-        listView.setOnScrollListener(this);
-        listView.setOnItemClickListener(this);
+        adapter = new ProductAdapter(getActivity(), progressBar, empty, navPosition, swipeContainer, listener);
+        mGridView.setAdapter(adapter);
+        mGridView.setOnScrollListener(this);
+        mGridView.setOnItemClickListener(this);
         empty.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (!adapter.mHasRequestedMore) {
-                    displayNews(Config.TASK_START);
+                    if (adapter.getCount() < min)
+                        howMany += min;
+                    displayNews(-1, Config.TASK_START);
                 }
             }
         });
     }
 
-    private void displayNews(int task) {
+    private void displayNews(int pointer, int task) {
         adapter.mHasRequestedMore = true;
-        CategoryManager manager = new CategoryManager(getActivity(), adapter, task);
+        ProductManager manager = new ProductManager(getActivity(), adapter, task);
+        //manager.execute(url + "?tag=" + tag + "&pointer=" + pointer + "&howMany=" + howMany);
         manager.execute(tag);
     }
 
 
+    private void onLoadMoreItems() {
+        Log.e("Ashraful", "On Load More");
+        displayNews(adapter.getPointer(), Config.TASK_MORE);
+    }
+
     @Override
     public void onRefresh() {
         if (!adapter.mHasRequestedMore) {
-            displayNews(Config.TASK_REFRESH);
+            if (adapter.getCount() < min)
+                howMany += min;
+            displayNews(-1, Config.TASK_REFRESH);
         }
     }
 
@@ -123,9 +132,16 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         // our handling
-        if (view.getId() == listView.getId()) {
-            int currentFirstVisibleItem = listView.getFirstVisiblePosition();
-            if (currentFirstVisibleItem - 2 > mLastFirstVisibleItem) {
+        if (!adapter.mHasRequestedMore) {
+            int lastInScreen = firstVisibleItem + visibleItemCount;
+            if (lastInScreen >= totalItemCount) {
+                onLoadMoreItems();
+            }
+        }
+
+        if (view.getId() == mGridView.getId()) {
+            int currentFirstVisibleItem = mGridView.getFirstVisiblePosition();
+            if (currentFirstVisibleItem > mLastFirstVisibleItem) {
                 if (actionBar.isShowing()) {
                     actionBar.hide();
                 }
@@ -153,6 +169,17 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
+    @Override
+    public void onReceiveMessage(Bundle bundle) {
+        if (bundle != null && listener != null) {
+            listener.onReceiveMessage(bundle);
+        }
+    }
+
+    public void refreshData(String tag) {
+        this.tag = tag;
+        displayNews(-1, Config.TASK_START);
+    }
 
     /**
      * Callback method to be invoked when an item in this AdapterView has
@@ -169,9 +196,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), CategoryHome.class);
-        CategoryHome.categories = adapter.getData();
-        intent.putExtra(Config.ARG_POSITION,position);
-        startActivity(intent);
+        Toast.makeText(getActivity(), "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
     }
 }

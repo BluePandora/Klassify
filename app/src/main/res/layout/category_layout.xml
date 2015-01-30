@@ -1,16 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/RootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Primary_White"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/list"
+    <FrameLayout
+        android:id="@+id/list_show"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:divider="@color/Primary_Black"
-        android:background="@color/button_material_light"/>
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@color/button_material_light"
+                android:divider="@color/Primary_Black" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <!-- Here is the view to show if the list is emtpy -->
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/empty"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/Primary_Black" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/load"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</RelativeLayout>

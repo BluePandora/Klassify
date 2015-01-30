@@ -14,6 +14,7 @@
     <string name="search_hint">search</string>
 
     <string name="url">http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</string>
+    <string name="url_product">http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1/products/</string>
 
     <string-array name="nav_array">
         <item>Explore</item>
@@ -52,11 +53,11 @@
         <item>Category,Home,Latest,Trending</item>
     </string-array>
     <string-array name="tag_array">
-        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
-        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
-        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
-        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
-        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54cb63af96d6b2a008431f37,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54cb63af96d6b2a008431f37,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54cb63af96d6b2a008431f37,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54cb63af96d6b2a008431f37,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54cb63af96d6b2a008431f37,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
     </string-array>
 
 

@@ -103,9 +103,10 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
     }
 
     private void displayNews(int pointer, int task) {
+        adapter.mHasRequestedMore = true;
         ProductManager manager = new ProductManager(getActivity(), adapter, task);
         //manager.execute(url + "?tag=" + tag + "&pointer=" + pointer + "&howMany=" + howMany);
-        manager.execute(url);
+        manager.execute(tag);
     }
 
 
@@ -117,7 +118,6 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
     @Override
     public void onRefresh() {
         if (!adapter.mHasRequestedMore) {
-            adapter.mHasRequestedMore = true;
             if (adapter.getCount() < min)
                 howMany += min;
             displayNews(-1, Config.TASK_REFRESH);
@@ -135,7 +135,6 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
         if (!adapter.mHasRequestedMore) {
             int lastInScreen = firstVisibleItem + visibleItemCount;
             if (lastInScreen >= totalItemCount) {
-                adapter.mHasRequestedMore = true;
                 onLoadMoreItems();
             }
         }
