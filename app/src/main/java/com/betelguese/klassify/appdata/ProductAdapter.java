@@ -1,6 +1,7 @@
 package com.betelguese.klassify.appdata;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -186,10 +187,21 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        int position = (Integer) v.getTag();
-        if (v.getId() == R.id.favorite) {
-            Log.e("Ashraful", "position:" + position);
+        //int position = (Integer) v.getTag();
+        if (v.getId() == R.id.favorites) {
+            Log.e("Ashraful", "position: Tada ");
+            v.setSelected(!v.isSelected());
+            if(v.isSelected()){
+                ((ImageButton)v).setColorFilter(Color.argb(0xFF,0x42,0xA5,0xF5));
+            }else {
+                ((ImageButton)v).setColorFilter(null);
+            }
+
         }
+
+        /* else if (v.getId() == R.id.favorites) {
+            Log.e("Ashraful", "position:" + position);
+        }*/
     }
 
     public void initRefresh() {
