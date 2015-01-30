@@ -12,4 +12,11 @@ public class Config {
     public static final int TASK_START = 0;
     public static final int TASK_REFRESH = 1;
     public static final int TASK_MORE = 2;
+
+    public static String TABLE_FAVOURITE = "favourite";
+    public static String TABLE_IMAGES = "images";
+    public static String FavTableItem[] = { "productId","title","description","images","email","createdDate","price" };
+    public static String ImageItem[] = { "image_id","imageUrl" };
+
+
 }
