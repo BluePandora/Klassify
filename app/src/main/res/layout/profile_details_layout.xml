@@ -139,10 +139,19 @@
             android:orientation="horizontal"
             android:padding="20dp">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/flat_button"
+                android:gravity="right"
+                android:padding="5dp"
+                android:src="@drawable/ic_create_24dp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_mail_24dp"
+                android:src="@drawable/ic_call_24dp"
                 android:tint="#00bbd2" />
 
             <LinearLayout
@@ -235,6 +244,15 @@
             android:orientation="horizontal"
             android:padding="20dp">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/flat_button"
+                android:gravity="right"
+                android:padding="5dp"
+                android:src="@drawable/ic_create_24dp" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -268,6 +286,8 @@
                         android:textSize="20sp"
                         app:font="RobotoCondensed-Regular.ttf" />
                 </LinearLayout>
+
+
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
