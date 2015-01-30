@@ -14,5 +14,6 @@ public class Config {
     public static final int TASK_MORE = 2;
     public static final String ARG_CATEGORY = "category";
     public static final String ARG_CATEGORY_ITEM = "item_category";
- }
 
+    public static final String PRODUCT = "product";
+}

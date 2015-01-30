@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="price" type="id"/>
+    <item name="buy" type="id"/>
+    <item name="save" type="id"/>
+</resources>
