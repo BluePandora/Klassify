@@ -2,7 +2,7 @@ package com.fedorvlasov.lazylist;
 
 import android.content.Context;
 
-import com.betelguese.shoppingapploginscreen.R;
+import com.betelguese.klassify.R;
 
 import java.io.File;
 

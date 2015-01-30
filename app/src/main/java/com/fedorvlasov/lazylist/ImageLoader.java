@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.betelguese.shoppingapploginscreen.R;
+import com.betelguese.klassify.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,28 +28,32 @@ import java.util.concurrent.Executors;
 
 public class ImageLoader {
 	private final boolean	             canScale;
-	MemoryCache	                         memoryCache	= new MemoryCache();
-	FileCache	                         fileCache;
+	private MemoryCache	                         memoryCache	= new MemoryCache();
+	private FileCache	                         fileCache;
 	private final Map<ImageView, String>	imageViews	= Collections
 	                                                           .synchronizedMap(new WeakHashMap<ImageView, String>());
-	ExecutorService	                     executorService;
-	Handler	                             handler	   = new Handler();	                                           // handler
+	private ExecutorService	                     executorService;
+	private Handler	                             handler	   = new Handler();	                                           // handler
 	private Context	                     context;
-	
+    private int	stub_id	= R.drawable.product;
+
 	public ImageLoader(Context context) {
 		canScale = false;
 		this.context = context;
 		fileCache = new FileCache(context);
 		executorService = Executors.newFixedThreadPool(5);
 	}
+
+    public ImageLoader(Context context,int stub_id) {
+        this(context);
+        this.stub_id = stub_id;
+    }
 	
 	public ImageLoader(Context context, boolean canScale) {
 		this.canScale = canScale;
 		fileCache = new FileCache(context);
 		executorService = Executors.newFixedThreadPool(5);
 	}
-	
-	final int	stub_id	= R.drawable.product;
 	
 	public void DisplayImage(String url, ImageView imageView) {
 		imageViews.put(imageView, url);

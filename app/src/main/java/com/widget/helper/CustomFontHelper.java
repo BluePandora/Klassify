@@ -6,7 +6,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.betelguese.shoppingapploginscreen.R;
+import com.betelguese.klassify.R;
 
 
 public class CustomFontHelper {

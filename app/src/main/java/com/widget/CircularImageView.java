@@ -29,7 +29,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import com.betelguese.shoppingapploginscreen.R;
+import com.betelguese.klassify.R;
 
 /**
  * Custom ImageView for circular images in Android while maintaining the
