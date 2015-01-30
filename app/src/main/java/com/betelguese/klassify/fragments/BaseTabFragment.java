@@ -1,6 +1,7 @@
 package com.betelguese.klassify.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.betelguese.klassify.R;
+import com.betelguese.klassify.activities.ProductDetailsActivity;
 import com.betelguese.klassify.appdata.Product;
 import com.betelguese.klassify.appdata.ProductAdapter;
 import com.betelguese.klassify.appdata.ProductManager;
@@ -196,6 +198,8 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getActivity(), "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+        intent.putExtra(Config.PRODUCT,adapter.getData(position));
+        startActivity(intent);
     }
 }

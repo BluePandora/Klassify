@@ -21,13 +21,29 @@ public class Product implements Parcelable {
 
 
     public Product(String productId, String title, String description, ArrayList<String> images, String email, String createdDate, double price) {
+        if (images != null && images.size() != 0)
+            this.images = images;
+        else {
+            this.images = new ArrayList<>();
+            this.images.add(noImage);
+        }
         this.title = title;
         this.description = description;
-        this.images = images;
         this.productId = productId;
         this.email = email;
         this.createdDate = createdDate;
         this.price = price;
+    }
+
+    public Product(Parcel in) {
+        this.title = in.readString();
+        this.description = in.readString();
+        if (images == null) setImages(null);
+        in.readStringList(images);
+        this.productId = in.readString();
+        this.email = in.readString();
+        this.createdDate = in.readString();
+        this.price = in.readDouble();
     }
 
     @Override
@@ -37,7 +53,13 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeStringList(images);
+        dest.writeString(productId);
+        dest.writeString(email);
+        dest.writeString(createdDate);
+        dest.writeDouble(price);
     }
 
     public ArrayList<String> getImages() {
@@ -107,4 +129,14 @@ public class Product implements Parcelable {
             return images.get(0);
         } else return noImage;
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 }

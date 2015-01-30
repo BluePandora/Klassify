@@ -23,7 +23,8 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':library')
+    compile files('libs/volley.jar')
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.etsy.android.grid:library:1.0.5'
-    compile files('libs/volley.jar')
+    compile 'com.android.support:support-v4:21.0.3'
 }

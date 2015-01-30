@@ -16,4 +16,5 @@ public class Config {
     public static final String ARG_CATEGORY_ITEM = "item_category";
 
     public static final String PRODUCT = "product";
+    public static final String ARG_IMAGES = "images";
 }

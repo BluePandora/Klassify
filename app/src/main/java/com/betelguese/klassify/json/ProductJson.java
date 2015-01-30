@@ -62,7 +62,7 @@ public class ProductJson {
         try {
             JSONArray array = item.getJSONArray(key);
             for (int i = 0; i < array.length(); i++) {
-                images.add(array.getJSONObject(i).getString(IMAGE));
+                images.add(array.getJSONObject(i).getString(URL));
             }
         } catch (Exception e) {
             e.printStackTrace();

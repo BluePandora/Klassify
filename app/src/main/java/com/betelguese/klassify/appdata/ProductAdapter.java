@@ -120,7 +120,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         ImageView image = (ImageView) v.findViewById(R.id.image);
         imageLoader.DisplayImage(data.getImage(), image);
 
-        ImageButton save = (ImageButton) v.findViewById(R.id.favorite);
+        ImageButton save = (ImageButton) v.findViewById(R.id.favorites);
         save.setTag(position);
         save.setOnClickListener(this);
         return v;
@@ -191,10 +191,10 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         if (v.getId() == R.id.favorites) {
             Log.e("Ashraful", "position: Tada ");
             v.setSelected(!v.isSelected());
-            if(v.isSelected()){
-                ((ImageButton)v).setColorFilter(Color.argb(0xFF,0x42,0xA5,0xF5));
-            }else {
-                ((ImageButton)v).setColorFilter(null);
+            if (v.isSelected()) {
+                ((ImageButton) v).setColorFilter(Color.argb(0xFF, 0x42, 0xA5, 0xF5));
+            } else {
+                ((ImageButton) v).setColorFilter(null);
             }
 
         }
@@ -207,6 +207,10 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     public void initRefresh() {
         progressBar.setVisibility(View.GONE);
         empty.setVisibility(View.GONE);
+    }
+
+    public Product getData(int position) {
+        return list.get(position);
     }
 
 //    private void sendMessage(TagPair tagPair) {
