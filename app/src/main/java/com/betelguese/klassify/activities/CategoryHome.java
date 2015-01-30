@@ -20,15 +20,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.betelguese.klassify.R;
+import com.betelguese.klassify.appdata.Category;
+import com.betelguese.klassify.appdata.CategoryAdapter;
 import com.betelguese.klassify.appdata.MyActionBarDrawerToggle;
 import com.betelguese.klassify.appdata.NavAdapter;
 import com.betelguese.klassify.fragments.BaseFragment;
+import com.betelguese.klassify.fragments.CategoryBaseFragment;
+import com.betelguese.klassify.fragments.CategoryFragment;
 import com.betelguese.klassify.utils.Config;
 import com.betelguese.klassify.utils.OnMessageListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,11 +48,10 @@ public class CategoryHome extends ActionBarActivity implements OnMessageListener
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private Toolbar toolbar;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-    private String[] mTitles;
     private TextView fullName, email;
     private ImageView profilePicture;
+    public static ArrayList<Category> categories;
+    private CategoryAdapter adapter;
 
     public static boolean active = false;
 
@@ -54,31 +59,23 @@ public class CategoryHome extends ActionBarActivity implements OnMessageListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity_layout);
-        mTitle = mDrawerTitle = getTitle();
-        mTitles = getResources().getStringArray(R.array.nav_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        View header = getLayoutInflater().inflate(R.layout.account, null);
-        fullName = (TextView) header.findViewById(R.id.title);
-        email = (TextView) header.findViewById(R.id.email);
-        profilePicture = (ImageView) header.findViewById(R.id.image);
-        fullName.setText("Ashraful " + "Islam");
-        email.setText("ashrafulcse.sust@gmail.com");
-        mDrawerList.addHeaderView(header, mTitle, false);
-        // set a custom shadow that overlays the main content when the drawer
-        // opens
+        //View header = getLayoutInflater().inflate(R.layout.account, null);
+        //fullName = (TextView) header.findViewById(R.id.title);
+        //email = (TextView) header.findViewById(R.id.email);
+        //profilePicture = (ImageView) header.findViewById(R.id.image);
+        //fullName.setText("Ashraful " + "Islam");
+        //email.setText("ashrafulcse.sust@gmail.com");
+        //mDrawerList.addHeaderView(header, mTitle, false);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        // TypedArray typedImages =
-        // getResources().obtainTypedArray(R.array.nav_images);
-        // int len = typedImages.length();
-        // int[] images = new int[len];
-        // for (int i = 0; i < len; i++)
-        // images[i] = typedImages.getResourceId(i, 0);
-        // typedImages.recycle();
-        mDrawerList.setAdapter(new NavAdapter(mTitles));
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.load);
+        adapter = new CategoryAdapter(this, progressBar, null, 0, null, null);
+        mDrawerList.setAdapter(adapter);
+        adapter.setData(categories);
+        adapter.invalidate();
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -92,9 +89,8 @@ public class CategoryHome extends ActionBarActivity implements OnMessageListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         if (savedInstanceState == null) {
-            selectItem(1);
+            selectItem(getIntent().getIntExtra(Config.ARG_POSITION, 0));
         }
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,54 +129,30 @@ public class CategoryHome extends ActionBarActivity implements OnMessageListener
 
     public void setArgument(Fragment fragment, int argument) {
         Bundle args = new Bundle();
-        args.putInt(Config.ARG_POSITION, argument);
+        args.putParcelable(Config.ARG_CATEGORY_ITEM, adapter.getData(argument));
         fragment.setArguments(args);
     }
 
 
     private void selectItem(int position) {
-        if (position != 0) {
-            // update the main content by replacing fragments
-            Fragment fragment = chooseFragment(position);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, mTitles[position - 1]).commit();
-            // update selected item and title, then close the drawer
-            mDrawerList.setItemChecked(position, true);
-            mDrawerLayout.closeDrawer(mDrawerList);
-            setTitle(mTitles[position - 1]);
-        }
-
+        // update the main content by replacing fragments
+        Fragment fragment = chooseFragment(position);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment, adapter.getTitle(position)).commit();
+        // update selected item and title, then close the drawer
+        mDrawerList.setItemChecked(position, true);
+        mDrawerLayout.closeDrawer(mDrawerList);
+        getSupportActionBar().setTitle(adapter.getTitle(position));
     }
 
     private Fragment chooseFragment(int position) {
         Fragment fragment = null;
         switch (position) {
-            case 1:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
-                break;
-            case 2:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
-                break;
-            case 3:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
-                break;
-            case 4:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
-                break;
             default:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
+                fragment = new CategoryBaseFragment();
+                setArgument(fragment, position);
         }
         return fragment;
-    }
-
-    @Override
-    public void setTitle(CharSequence title) {
-        getSupportActionBar().setTitle(title);
     }
 
     /**
@@ -223,16 +195,6 @@ public class CategoryHome extends ActionBarActivity implements OnMessageListener
         active = false;
     }
 
-
-    private Fragment getFragmentByPosition(int position) {
-        String tag = mTitles[position];
-        List<Fragment> list = getSupportFragmentManager().getFragments();
-        for (Fragment fragment : list) {
-            if (fragment != null && tag.equals(fragment.getTag()))
-                return fragment;
-        }
-        return null;
-    }
 
     @Override
     public void onReceiveMessage(Bundle bundle) {

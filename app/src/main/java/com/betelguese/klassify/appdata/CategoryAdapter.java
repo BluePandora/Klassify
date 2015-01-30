@@ -2,6 +2,7 @@ package com.betelguese.klassify.appdata;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,9 +55,9 @@ public class CategoryAdapter extends BaseAdapter implements View.OnClickListener
             list.clear();
             invalidate();
         }
-        view.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
-        empty.setVisibility(View.GONE);
+        if (view != null) view.setVisibility(View.GONE);
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+        if (empty != null) empty.setVisibility(View.GONE);
     }
 
     @Override
@@ -88,14 +89,14 @@ public class CategoryAdapter extends BaseAdapter implements View.OnClickListener
     public void invalidate() {
         progressBar.setVisibility(View.GONE);
         if (list.size() < 1) {
-            empty.setVisibility(View.VISIBLE);
-            view.setVisibility(View.GONE);
+            if (empty != null) empty.setVisibility(View.VISIBLE);
+            if (view != null) view.setVisibility(View.GONE);
         } else {
-            empty.setVisibility(View.GONE);
-            view.setVisibility(View.VISIBLE);
+            if (empty != null) empty.setVisibility(View.GONE);
+            if (view != null) view.setVisibility(View.VISIBLE);
         }
-        view.setRefreshing(false);
-        empty.setRefreshing(false);
+        if (view != null) view.setRefreshing(false);
+        if (empty != null) empty.setRefreshing(false);
         mHasRequestedMore = false;
         notifyDataSetChanged();
     }
@@ -131,8 +132,8 @@ public class CategoryAdapter extends BaseAdapter implements View.OnClickListener
 
 
     public void initMore() {
-        progressBar.setVisibility(View.VISIBLE);
-        empty.setVisibility(View.GONE);
+        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+        if (empty != null) empty.setVisibility(View.GONE);
     }
 
     public ArrayList<Category> getData() {
@@ -150,11 +151,15 @@ public class CategoryAdapter extends BaseAdapter implements View.OnClickListener
     }
 
     public void initRefresh() {
-        progressBar.setVisibility(View.GONE);
-        empty.setVisibility(View.GONE);
+        if (progressBar != null) progressBar.setVisibility(View.GONE);
+        if (empty != null) empty.setVisibility(View.GONE);
     }
 
     public Category getData(int position) {
         return list.get(position);
+    }
+
+    public String getTitle(int position) {
+        return list.get(position).getTitle();
     }
 }
