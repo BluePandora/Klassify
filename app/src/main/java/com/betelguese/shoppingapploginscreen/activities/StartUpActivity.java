@@ -48,7 +48,6 @@ public class StartUpActivity extends ActionBarActivity {
                     return new LogInFragment();
             }
         }
-
         @Override
         public int getCount() {
             return NUM_PAGES;

@@ -9,7 +9,7 @@
         android:id="@+id/shopping_image_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/log_in_screen" />
 
     <LinearLayout
@@ -42,17 +42,16 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/text_input_background"
-            android:hint="User Name"
-            android:textSize="17sp"
+            android:hint="Email"
             android:padding="10dip"
             android:textColor="#1A1A1A"
             android:textColorHint="#dd1A1A1A"
+            android:textSize="17sp"
             app:font="RobotoCondensed-Light.ttf" />
 
         <com.widget.CustomEditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="17sp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
@@ -62,6 +61,21 @@
             android:padding="10dip"
             android:textColor="#1A1A1A"
             android:textColorHint="#dd1A1A1A"
+            android:textSize="17sp"
+            app:font="RobotoCondensed-Light.ttf" />
+
+        <com.widget.CustomButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/green_holo_button"
+            android:text="LOG IN"
+            android:padding="10dip"
+            android:textColor="#1A1A1A"
+            android:textColorHint="#dd1A1A1A"
+            android:textSize="17sp"
             app:font="RobotoCondensed-Light.ttf" />
     </LinearLayout>
 

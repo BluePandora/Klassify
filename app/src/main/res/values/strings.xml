@@ -4,5 +4,59 @@
     <string name="app_name">Shopper\'s Cart</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="empty">No Items.\nPull down to Refresh</string>
+    <string name="url">http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</string>
+    <string name="save_text">Save</string>
+    <string name="buy_text">Buy</string>
+    <string name="loading_text">Loading</string>
+    <string name="title_activity_product_list">ProductListActivity</string>
+    <string name="search_hint">search</string>
+
+    <string-array name="nav_array">
+        <item>Explore</item>
+        <item>Favourites</item>
+        <item>Cart</item>
+        <item>Settings</item>
+        <item>Logout</item>
+    </string-array>
+    <string-array name="cat_array">
+        <item>Computers</item>
+        <item>Electronics</item>
+        <item>Gift Cards</item>
+        <item>Grocery &amp; Gourmet Food</item>
+        <item>Health &amp; Personal Care</item>
+        <item>Home &amp; Kitchen</item>
+        <item>Industrial &amp; Scientific</item>
+        <item>Magazine Subscriptions</item>
+        <item>Musical Instruments</item>
+        <item>Office Products</item>
+        <item>Patio, Lawn &amp; Garden</item>
+        <item>Pet Supplies</item>
+        <item>Prime Pantry</item>
+        <item>Sports &amp; Outdoors</item>
+        <item>Tools &amp; Home Improvement</item>
+        <item>Toys &amp; Games</item>
+        <item>Video Games</item>
+        <item>Wine</item>
+        <item>Women</item>
+        <item>Men</item>
+    </string-array>
+    <string-array name="tab_array">
+        <item>Category,Home,Latest,Trending</item>
+        <item>Category,Home,Latest,Trending</item>
+        <item>Category,Home,Latest,Trending</item>
+        <item>Category,Home,Latest,Trending</item>
+        <item>Category,Home,Latest,Trending</item>
+    </string-array>
+    <string-array name="tag_array">
+        <item>category,home,latest,trend</item>
+        <item>category,home,latest,trend</item>
+        <item>category,home,latest,trend</item>
+        <item>category,home,latest,trend</item>
+        <item>category,home,latest,trend</item>
+    </string-array>
+
 
 </resources>
