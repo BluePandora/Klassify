@@ -84,6 +84,7 @@ public class Product implements Parcelable {
 
     public void setEmail(String email) {
         this.email = email;
+
     }
 
     public void setPrice(double price) {
