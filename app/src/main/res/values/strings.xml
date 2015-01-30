@@ -7,12 +7,13 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="empty">No Items.\nPull down to Refresh</string>
-    <string name="url">http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</string>
     <string name="save_text">Save</string>
     <string name="buy_text">Buy</string>
     <string name="loading_text">Loading</string>
     <string name="title_activity_product_list">ProductListActivity</string>
     <string name="search_hint">search</string>
+
+    <string name="url">http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</string>
 
     <string-array name="nav_array">
         <item>Explore</item>
@@ -51,11 +52,11 @@
         <item>Category,Home,Latest,Trending</item>
     </string-array>
     <string-array name="tag_array">
-        <item>category,home,latest,trend</item>
-        <item>category,home,latest,trend</item>
-        <item>category,home,latest,trend</item>
-        <item>category,home,latest,trend</item>
-        <item>category,home,latest,trend</item>
+        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
+        <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
     </string-array>
 
 
