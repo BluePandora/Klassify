@@ -28,9 +28,21 @@
         app:font="RobotoCondensed-Bold.ttf" />
 
     <com.widget.CustomButton
+        android:id="@+id/contact_info_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_message"
+        android:layout_margin="10dp"
+        android:background="@drawable/green_holo_button"
+        android:text="ADD CONTACT INFO"
+        android:textColor="@color/Primary_Grey_900"
+        app:font="RobotoCondensed-Light.ttf" />
+
+    <com.widget.CustomButton
+        android:id="@+id/share_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_info_button"
         android:layout_margin="10dp"
         android:background="@drawable/green_holo_button"
         android:text="SHARE"
