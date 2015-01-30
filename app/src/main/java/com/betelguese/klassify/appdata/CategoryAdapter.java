@@ -2,7 +2,6 @@ package com.betelguese.klassify.appdata;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,9 +22,9 @@ import java.util.ArrayList;
  * Shahjalal University of Science and Technology,Sylhet
  */
 
-public class ProductAdapter extends BaseAdapter implements View.OnClickListener {
+public class CategoryAdapter extends BaseAdapter implements View.OnClickListener {
 
-    private ArrayList<Product> list = new ArrayList<Product>();
+    private ArrayList<Category> list = new ArrayList<Category>();
     private ProgressBar progressBar;
     private SwipeRefreshLayout empty;
     private ImageLoader imageLoader;
@@ -38,7 +37,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     public boolean mHasRequestedMore;
 
 
-    public ProductAdapter(Context context, ProgressBar progressBar, SwipeRefreshLayout empty, int navPosition, SwipeRefreshLayout view, OnMessageListener listener) {
+    public CategoryAdapter(Context context, ProgressBar progressBar, SwipeRefreshLayout empty, int navPosition, SwipeRefreshLayout view, OnMessageListener listener) {
         this.progressBar = progressBar;
         this.empty = empty;
         this.context = context;
@@ -68,7 +67,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
             return 0;
     }
 
-    public void setData(ArrayList<Product> list) {
+    public void setData(ArrayList<Category> list) {
         this.list = list;
     }
 
@@ -82,7 +81,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         return position;
     }
 
-    public void add(Product data) {
+    public void add(Category data) {
         list.add(data);
     }
 
@@ -105,37 +104,21 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     public View getView(int position, View v, ViewGroup parent) {
         if (v == null) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            v = inflater.inflate(R.layout.product_list_item, parent, false);
+            v = inflater.inflate(R.layout.drawer_list_item, parent, false);
         }
-        Product data = list.get(position);
+        Category data = list.get(position);
 
-        TextView name = (TextView) v.findViewById(R.id.product_name);
+        TextView name = (TextView) v.findViewById(R.id.title);
         name.setText(data.getTitle());
-
-        TextView title = (TextView) v.findViewById(R.id.product_price);
-        title.setText(String.valueOf("৳" + data.getPrice()));
-
-        ImageView image = (ImageView) v.findViewById(R.id.image);
-        imageLoader.DisplayImage(data.getImage(), image);
-
-//        ImageView save = (ImageView) v.findViewById(R.id.save);
-//        ImageView buy = (ImageView) v.findViewById(R.id.buy);
-//        save.setTag(position);
-//        buy.setTag(position);
-//        save.setOnClickListener(this);
-//        buy.setOnClickListener(this);
 
         return v;
     }
 
 
     public String getDataID(int position) {
-        return list.get(position).getProductId();
+        return list.get(position).getId();
     }
 
-    public String getUrl(int position) {
-        return list.get(position).getImage();
-    }
 
     public int getPointer() {
         return pointer;
@@ -146,44 +129,13 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         this.pointer = pointer;
     }
 
-    public void setMoreData(ArrayList<Product> categories) {
-        if (categories != null && categories.size() != 0) {
-            if (list == null)
-                list = new ArrayList<Product>();
-            list.addAll(categories);
-        }
-    }
 
     public void initMore() {
         progressBar.setVisibility(View.VISIBLE);
         empty.setVisibility(View.GONE);
     }
 
-    public void setRefreshData(ArrayList<Product> list) {
-        if (this.list == null || this.list.size() == 0)
-            this.list = list;
-        else if (list != null && list.size() != 0) {
-            try {
-                String firstId = list.get(0).getProductId();
-                boolean isFound = false;
-                for (int i = list.size() - 1; i >= 0; i--) {
-                    if (firstId.equals(list.get(i).getProductId())) {
-                        isFound = true;
-                    } else if (isFound) {
-                        this.list.set(0, list.get(i));
-                    }
-                }
-
-                if (!isFound) {
-                    this.list.addAll(0, list);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public ArrayList<Product> getData() {
+    public ArrayList<Category> getData() {
         return list;
     }
 
@@ -202,14 +154,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         empty.setVisibility(View.GONE);
     }
 
-//    private void sendMessage(TagPair tagPair) {
-//        if (listener != null) {
-//            Bundle bundle = new Bundle();
-//            bundle.putInt(Config.ARG_TYPE, Config.TYPE_TAG);
-//            bundle.putString(Config.ARG_KEY, tagPair.getKey());
-//            bundle.putString(Config.ARG_VALUE, tagPair.getValue());
-//            bundle.putInt(Config.ARG_POSITION, navPosition);
-//            listener.onReceiveMessage(bundle);
-//        }
-//    }
+    public Category getData(int position) {
+        return list.get(position);
+    }
 }

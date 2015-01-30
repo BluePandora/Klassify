@@ -2,21 +2,37 @@ package com.betelguese.klassify.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.betelguese.klassify.R;
+import com.betelguese.klassify.activities.CategoryHome;
 import com.betelguese.klassify.activities.ProductListActivity;
+import com.betelguese.klassify.appdata.Category;
+import com.betelguese.klassify.appdata.CategoryAdapter;
+import com.betelguese.klassify.appdata.CategoryManager;
 import com.betelguese.klassify.appdata.NavAdapter;
+import com.betelguese.klassify.appdata.Product;
+import com.betelguese.klassify.appdata.ProductAdapter;
+import com.betelguese.klassify.appdata.ProductManager;
 import com.betelguese.klassify.utils.Config;
+import com.betelguese.klassify.utils.OnMessageListener;
+import com.etsy.android.grid.StaggeredGridView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -24,28 +40,118 @@ import com.betelguese.klassify.utils.Config;
  * Shahjalal University of Science and Technology,Sylhet
  */
 
-public class CategoryFragment extends Fragment implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
+public class CategoryFragment extends Fragment implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener, SwipeRefreshLayout.OnRefreshListener {
     private final String TAG = "Ashraful";
-    private NavAdapter adapter;
+    private CategoryAdapter adapter;
     private ListView listView;
     private String tag;
     private int navPosition;
-    private String[] categories;
-    private ActionBar actionBar;
+    private SwipeRefreshLayout swipeContainer;
+    private final String SAVE_VALUE_KEY = "save";
     private int mLastFirstVisibleItem;
+    private ActionBar actionBar;
+    private OnMessageListener listener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup c, Bundle save) {
         View v = inflater.inflate(R.layout.category_layout, c, false);
-        actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
-        categories = getResources().getStringArray(R.array.cat_array);
-        listView = (ListView) v.findViewById(R.id.list);
-        adapter = new NavAdapter(categories);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
-        listView.setOnScrollListener(this);
+        initView(v, save);
+        if (save != null) {
+            adapter.initMore();
+            ArrayList<Category> categories = save.getParcelableArrayList(SAVE_VALUE_KEY);
+            if (categories == null)
+                categories = new ArrayList<Category>();
+            adapter.setData(categories);
+            adapter.invalidate();
+        } else {
+            displayNews(Config.TASK_START);
+        }
         return v;
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (adapter != null)
+            outState.putParcelableArrayList(SAVE_VALUE_KEY, adapter.getData());
+    }
+
+    private void initView(View v, Bundle save) {
+        actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+        navPosition = getArguments().getInt(Config.ARG_POSITION);
+        if (tag == null)
+            tag = getArguments().getString(Config.ARG_TAG);
+        SwipeRefreshLayout empty = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_empty);
+        ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.load);
+        listView = (ListView) v.findViewById(R.id.list);
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
+        swipeContainer.setOnRefreshListener(this);
+        adapter = new CategoryAdapter(getActivity(), progressBar, empty, navPosition, swipeContainer, listener);
+        listView.setAdapter(adapter);
+        listView.setOnScrollListener(this);
+        listView.setOnItemClickListener(this);
+        empty.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!adapter.mHasRequestedMore) {
+                    displayNews(Config.TASK_START);
+                }
+            }
+        });
+    }
+
+    private void displayNews(int task) {
+        adapter.mHasRequestedMore = true;
+        CategoryManager manager = new CategoryManager(getActivity(), adapter, task);
+        manager.execute(tag);
+    }
+
+
+    @Override
+    public void onRefresh() {
+        if (!adapter.mHasRequestedMore) {
+            displayNews(Config.TASK_REFRESH);
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        // our handling
+        if (view.getId() == listView.getId()) {
+            int currentFirstVisibleItem = listView.getFirstVisiblePosition();
+            if (currentFirstVisibleItem - 2 > mLastFirstVisibleItem) {
+                if (actionBar.isShowing()) {
+                    actionBar.hide();
+                }
+            } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                if (!actionBar.isShowing()) {
+                    actionBar.show();
+                }
+            }
+            mLastFirstVisibleItem = currentFirstVisibleItem;
+        }
+    }
+
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            listener = (OnMessageListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnMessageListener");
+        }
+    }
+
 
     /**
      * Callback method to be invoked when an item in this AdapterView has
@@ -62,60 +168,8 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), ProductListActivity.class);
-        intent.putExtra(Config.ARG_TAG, adapter.getTag(position));
+        Intent intent = new Intent(getActivity(), CategoryHome.class);
+        intent.putExtra(Config.ARG_CATEGORY, adapter.getData(position));
         startActivity(intent);
-    }
-
-    /**
-     * Callback method to be invoked while the list view or grid view is being scrolled. If the
-     * view is being scrolled, this method will be called before the next frame of the scroll is
-     * rendered. In particular, it will be called before any calls to
-     * {@link android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)}.
-     *
-     * @param view        The view whose scroll state is being reported
-     * @param scrollState The current scroll state. One of
-     *                    {@link #SCROLL_STATE_TOUCH_SCROLL} or {@link #SCROLL_STATE_IDLE}.
-     */
-    @Override
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
-        if (view.getId() == listView.getId()) {
-            int currentFirstVisibleItem = listView.getFirstVisiblePosition();
-            if (currentFirstVisibleItem > mLastFirstVisibleItem) {
-                if (actionBar.isShowing()) {
-                    actionBar.hide();
-                }
-            } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
-                if (!actionBar.isShowing()) {
-                    actionBar.show();
-                }
-            }
-            mLastFirstVisibleItem = currentFirstVisibleItem;
-        }
-    }
-
-    /**
-     * Callback method to be invoked when the list or grid has been scrolled. This will be
-     * called after the scroll has completed
-     *
-     * @param view             The view whose scroll state is being reported
-     * @param firstVisibleItem the index of the first visible cell (ignore if
-     *                         visibleItemCount == 0)
-     * @param visibleItemCount the number of visible cells
-     * @param totalItemCount   the number of items in the list adaptor
-     */
-    @Override
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            ((ActionBarActivity) activity).getSupportActionBar().show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
