@@ -26,6 +26,7 @@
                 android:tint="#ff004e9b" />
 
             <RelativeLayout
+                android:id="@+id/add_image"
                 android:layout_width="350dp"
                 android:layout_height="350dp"
                 android:layout_centerHorizontal="true"
@@ -161,6 +162,7 @@
             </LinearLayout>
 
             <com.widget.CustomButton
+                android:id="@+id/add_product_button"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
