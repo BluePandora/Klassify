@@ -92,5 +92,4 @@ public class ProductDetailsFragment extends Fragment {
         ImageButton smsButton;
         ImageButton shareButton;
     }
-
 }
