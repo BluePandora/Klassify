@@ -9,8 +9,8 @@
         android:id="@+id/shopping_image_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/log_in_screen" />
+        android:scaleType="fitXY"
+        android:src="#ff0084f5" />
 
     <LinearLayout
         android:id="@+id/log_in_container"
@@ -30,7 +30,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Shopper's Cart"
+            android:text="Klassify"
             android:textColor="#FAFAFA"
             android:textSize="40sp"
             app:font="RobotoCondensed-Light.ttf" />
@@ -42,7 +42,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/text_input_background"
-            android:hint="Email"
+            android:hint="User Name"
             android:padding="10dip"
             android:textColor="#1A1A1A"
             android:textColorHint="#dd1A1A1A"
@@ -65,18 +65,17 @@
             app:font="RobotoCondensed-Light.ttf" />
 
         <com.widget.CustomButton
+            android:id="@+id/login_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/log_in_container"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
             android:background="@drawable/green_holo_button"
-            android:text="LOG IN"
-            android:padding="10dip"
-            android:textColor="#1A1A1A"
-            android:textColorHint="#dd1A1A1A"
-            android:textSize="17sp"
-            app:font="RobotoCondensed-Light.ttf" />
+            android:text="Forgot your Password?"
+            android:textColor="@drawable/btn_holo_text"
+            android:textSize="16sp"
+            app:font="Roboto-Light.ttf" />
     </LinearLayout>
 
     <com.widget.CustomButton
