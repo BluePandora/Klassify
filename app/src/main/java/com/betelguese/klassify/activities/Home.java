@@ -85,7 +85,7 @@ public class Home extends ActionBarActivity implements OnMessageListener {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
+        // ActionBarDrawerToggle ties together the the proper interactionss
         // between the sliding drawer and the action bar app icon
         mDrawerToggle = new MyActionBarDrawerToggle(this, mDrawerLayout);
 

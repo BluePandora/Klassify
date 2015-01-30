@@ -109,18 +109,33 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         }
         Product data = list.get(position);
 
-        TextView title = (TextView) v.findViewById(R.id.price);
+<<<<<<< HEAD
+        TextView name = (TextView) v.findViewById(R.id.product_name);
+        name.setText(data.getTitle());
+
+=======
+>>>>>>> origin/devfahad
+        TextView title = (TextView) v.findViewById(R.id.product_price);
         title.setText(String.valueOf("৳" + data.getPrice()));
 
         ImageView image = (ImageView) v.findViewById(R.id.image);
         //imageLoader.DisplayImage(data.getImage(), image);
 
-        ImageView save = (ImageView) v.findViewById(R.id.save);
-        ImageView buy = (ImageView) v.findViewById(R.id.buy);
-        save.setTag(position);
-        buy.setTag(position);
-        save.setOnClickListener(this);
-        buy.setOnClickListener(this);
+<<<<<<< HEAD
+//        ImageView save = (ImageView) v.findViewById(R.id.save);
+//        ImageView buy = (ImageView) v.findViewById(R.id.buy);
+//        save.setTag(position);
+//        buy.setTag(position);
+//        save.setOnClickListener(this);
+//        buy.setOnClickListener(this);
+=======
+        //ImageView save = (ImageView) v.findViewById(R.id.save);
+        //ImageView buy = (ImageView) v.findViewById(R.id.buy);
+        //save.setTag(position);
+        //buy.setTag(position);
+        //save.setOnClickListener(this);
+       // buy.setOnClickListener(this);
+>>>>>>> origin/devfahad
 
         return v;
     }
@@ -187,11 +202,19 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
-        if (v.getId() == R.id.buy) {
+<<<<<<< HEAD
+//        if (v.getId() == R.id.buy) {
+//            Log.e("Ashraful", "position:" + position);
+//        } else if (v.getId() == R.id.save) {
+//            Log.e("Ashraful", "position:" + position);
+//        }
+=======
+       /* if (v.getId() == R.id.buy) {
             Log.e("Ashraful", "position:" + position);
         } else if (v.getId() == R.id.save) {
             Log.e("Ashraful", "position:" + position);
-        }
+        }*/
+>>>>>>> origin/devfahad
     }
 
     public void initRefresh() {

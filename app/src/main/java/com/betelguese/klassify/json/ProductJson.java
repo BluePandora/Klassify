@@ -47,7 +47,7 @@ public class ProductJson {
                     String email = getData(newsItem, EMAIL);
                     double price = Double.parseDouble(getData(newsItem, PRICE));
                     String createdDate = getData(newsItem, CREATED_DATE);
-                    news.add(new Product(id, title, description, price, image, category, email, createdDate));
+                    //news.add(new Product(id, title, description, price, image, category, email, createdDate));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

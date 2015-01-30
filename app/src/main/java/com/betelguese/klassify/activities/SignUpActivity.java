@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.betelguese.klassify.R;
 import com.betelguese.klassify.fragments.LogInFragment;
+import com.betelguese.klassify.fragments.SignUpFragment;
 
 
 public class SignUpActivity extends ActionBarActivity {
@@ -14,7 +15,7 @@ public class SignUpActivity extends ActionBarActivity {
         setContentView(R.layout.activity_signup);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new LogInFragment())
+                    .add(R.id.container, new SignUpFragment())
                     .commit();
         }
     }

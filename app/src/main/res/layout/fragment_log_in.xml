@@ -36,13 +36,15 @@
             app:font="RobotoCondensed-Light.ttf" />
 
         <com.widget.CustomEditText
+            android:id="@+id/emailEd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/text_input_background"
-            android:hint="User Name"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
             android:padding="10dip"
             android:textColor="#1A1A1A"
             android:textColorHint="#dd1A1A1A"
@@ -50,6 +52,7 @@
             app:font="RobotoCondensed-Light.ttf" />
 
         <com.widget.CustomEditText
+            android:id="@+id/passwordEd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
