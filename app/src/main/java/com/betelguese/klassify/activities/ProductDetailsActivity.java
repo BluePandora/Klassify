@@ -57,7 +57,7 @@ public class ProductDetailsActivity extends ActionBarActivity {
 
     private void startAnimaion() {
         if (product.getImage() != null) {
-            viewPager.setAdapter(new ImageSlideAdapter(this, product.getImages(),true));
+            viewPager.setAdapter(new ImageSlideAdapter(this, product.getImages(), true));
             pageIndicator.setViewPager(viewPager);
             runnable(product.getImages().size());
             handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
@@ -152,9 +152,7 @@ public class ProductDetailsActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
         }
 

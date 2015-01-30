@@ -98,9 +98,7 @@ public class ProductListActivity extends ActionBarActivity implements AbsListVie
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
         }
 

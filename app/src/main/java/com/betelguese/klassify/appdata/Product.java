@@ -18,9 +18,9 @@ public class Product implements Parcelable {
     private String email, createdDate;
     private double price;
     private final String noImage = "http://sustcse10.net/ashraful/emarket/product.jpg";
+    private String phone;
 
-
-    public Product(String productId, String title, String description, ArrayList<String> images, String email, String createdDate, double price) {
+    public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price) {
         if (images != null && images.size() != 0)
             this.images = images;
         else {
@@ -33,6 +33,7 @@ public class Product implements Parcelable {
         this.email = email;
         this.createdDate = createdDate;
         this.price = price;
+        this.phone = phone;
     }
 
     public Product(Parcel in) {
@@ -40,6 +41,7 @@ public class Product implements Parcelable {
         this.description = in.readString();
         if (images == null) setImages(null);
         in.readStringList(images);
+        this.phone = in.readString();
         this.productId = in.readString();
         this.email = in.readString();
         this.createdDate = in.readString();
@@ -56,6 +58,7 @@ public class Product implements Parcelable {
         dest.writeString(title);
         dest.writeString(description);
         dest.writeStringList(images);
+        dest.writeString(phone);
         dest.writeString(productId);
         dest.writeString(email);
         dest.writeString(createdDate);
@@ -122,6 +125,14 @@ public class Product implements Parcelable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public String getImage() {

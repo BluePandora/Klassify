@@ -26,6 +26,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     String EMAIL = "email";
     String CREATED_DATE = "createdDate";
     String PRICE = "price";
+    String PHONE = "phone";
     String IMAGE = "image";
 
     Context context;
@@ -260,6 +261,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 String description = wordList.get(i).get(DESCRIPTION);
                 String email = wordList.get(i).get(EMAIL);
                 String createdDate = wordList.get(i).get(CREATED_DATE);
+                String phone = wordList.get(i).get(PHONE);
                 double price = Double.parseDouble(wordList.get(i).get(PRICE));
 
                 ArrayList<String> images = new ArrayList<String>();
@@ -272,7 +274,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
                 //(String productId, String title, String description, ArrayList<String> images, String email, String createdDate, double price) {
 
-                Product productItem = new Product(productId, title, description, images, email, createdDate, price);
+                Product productItem = new Product(productId, title, description, images, phone, email, createdDate, price);
                 productList.add(productItem);
             }
         }

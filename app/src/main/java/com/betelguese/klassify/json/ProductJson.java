@@ -18,6 +18,7 @@ public class ProductJson {
     private final String DESCRIPTION = "description";
     private final String PRICE = "price";
     private final String IMAGE = "image";
+    private final String PHONE = "phone";
     private final String URL = "url";
     private final String EMAIL = "email";
     private final String CREATED_DATE = "created_date";
@@ -43,10 +44,11 @@ public class ProductJson {
                     String title = getData(newsItem, TITLE);
                     String description = getData(newsItem, DESCRIPTION);
                     ArrayList<String> image = getImages(newsItem, IMAGE);
+                    String phone = getData(newsItem, PHONE);
                     String email = getData(newsItem, EMAIL);
                     double price = Double.parseDouble(getData(newsItem, PRICE));
                     String createdDate = getData(newsItem, CREATED_DATE);
-                    news.add(new Product(id, title, description, image, email, createdDate, price));
+                    news.add(new Product(id, title, description, image, phone, email, createdDate, price));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
