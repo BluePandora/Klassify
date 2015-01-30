@@ -75,7 +75,7 @@
                 android:background="@drawable/flat_button"
                 android:gravity="right"
                 android:padding="5dp"
-                android:scaleType="fitEnd"
+
                 android:src="@drawable/ic_create_24dp" />
         </RelativeLayout>
 
