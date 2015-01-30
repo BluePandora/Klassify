@@ -7,3 +7,5 @@
 /build
 /app/app.iml
 /CWCProject.iml
+library/build/intermediates/bundles/release/classes.jar
+library/build/outputs/aar/library-release.aar
