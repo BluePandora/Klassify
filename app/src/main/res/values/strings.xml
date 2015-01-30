@@ -12,7 +12,6 @@
     <string name="loading_text">Loading</string>
     <string name="title_activity_product_list">ProductListActivity</string>
     <string name="search_hint">search</string>
-
     <string name="url">http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</string>
 
     <string-array name="nav_array">
@@ -59,5 +58,7 @@
         <item>http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1,http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</item>
     </string-array>
 
+    <string name="title_activity_product_details">ProductDetailsActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

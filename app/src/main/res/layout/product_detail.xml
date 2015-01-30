@@ -12,15 +12,22 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/product_image"
-                android:layout_width="fill_parent"
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:background="@color/ripple_material_light"
-                android:scaleType="centerCrop"
-                android:src="@drawable/product_detail_img" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp" />
+
+            <com.betelguese.klassify.utils.CirclePageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/view_pager"
+                android:padding="10dip" />
 
             <ImageButton
+                android:id="@+id/favourite_button"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentRight="true"
@@ -35,7 +42,7 @@
                 android:id="@+id/product_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/product_image"
+                android:layout_below="@+id/indicator"
                 android:paddingBottom="5dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
@@ -71,12 +78,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_price"
+                android:layout_marginBottom="100dp"
                 android:layout_marginTop="10dp"
                 android:padding="15dp"
                 android:text="Dummy details"
                 android:textColor="#ff009b9b"
                 android:textSize="16sp"
                 app:font="Roboto-Light.ttf" />
+
             <View
                 android:id="@+id/dummy_divider2"
                 android:layout_width="fill_parent"
@@ -97,6 +106,7 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/call_advert_user_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -107,6 +117,7 @@
             android:text="CALL" />
 
         <ImageButton
+            android:id="@+id/sms_advert_user_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -117,6 +128,7 @@
             android:text="MESSAGE" />
 
         <ImageButton
+            android:id="@+id/share_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

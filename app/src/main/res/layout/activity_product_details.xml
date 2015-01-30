@@ -1,0 +1,5 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/prodcut_details_container"
+    android:layout_height="match_parent">
+</RelativeLayout>
