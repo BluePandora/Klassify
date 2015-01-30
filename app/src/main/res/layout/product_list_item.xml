@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/holo_white">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/panel">
 
     <ImageView
         android:id="@+id/image"
@@ -11,43 +11,40 @@
         android:layout_height="wrap_content"
         android:minHeight="130dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher"/>
+        android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/image"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textColor="@color/Primary_Black"
-        android:textStyle="bold"/>
+        android:text="Product Name"
+        android:textColor="#1A1a1a"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/price"
-        android:orientation="horizontal">
+        android:layout_below="@+id/product_name"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Product Price"
+        android:textColor="#1A1a1a"
+        android:textSize="16dp"
+        android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:scaleType="centerInside"
-            android:src="@drawable/save_button"/>
-
-        <ImageView
-            android:id="@+id/buy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:scaleType="centerInside"
-            android:src="@drawable/buy_button"/>
-    </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/image"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/feed_item_popup" />
 </RelativeLayout>
