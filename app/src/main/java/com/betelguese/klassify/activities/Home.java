@@ -48,7 +48,6 @@ public class Home extends ActionBarActivity implements OnMessageListener {
     private TextView fullName, email;
     private ImageView profilePicture;
 
-
     public static boolean active = false;
 
     @Override
