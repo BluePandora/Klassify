@@ -1,6 +1,7 @@
 package com.betelguese.klassify.appdata;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -109,19 +111,18 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         }
         Product data = list.get(position);
 
-        TextView title = (TextView) v.findViewById(R.id.price);
-        title.setText(String.valueOf("৳" + data.getPrice()));
+        TextView title = (TextView) v.findViewById(R.id.product_name);
+        title.setText(String.valueOf(data.getTitle()));
+
+        TextView price = (TextView) v.findViewById(R.id.product_price);
+        price.setText(String.valueOf("৳" + data.getPrice()));
 
         ImageView image = (ImageView) v.findViewById(R.id.image);
         imageLoader.DisplayImage(data.getImage(), image);
 
-        ImageView save = (ImageView) v.findViewById(R.id.save);
-        ImageView buy = (ImageView) v.findViewById(R.id.buy);
+        ImageButton save = (ImageButton) v.findViewById(R.id.favorites);
         save.setTag(position);
-        buy.setTag(position);
         save.setOnClickListener(this);
-        buy.setOnClickListener(this);
-
         return v;
     }
 
@@ -131,7 +132,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     }
 
     public String getUrl(int position) {
-        return list.get(position).getImage();
+        return null;//list.get(position).getImage();
     }
 
     public int getPointer() {
@@ -186,17 +187,30 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        int position = (Integer) v.getTag();
-        if (v.getId() == R.id.buy) {
-            Log.e("Ashraful", "position:" + position);
-        } else if (v.getId() == R.id.save) {
-            Log.e("Ashraful", "position:" + position);
+        //int position = (Integer) v.getTag();
+        if (v.getId() == R.id.favorites) {
+            Log.e("Ashraful", "position: Tada ");
+            v.setSelected(!v.isSelected());
+            if (v.isSelected()) {
+                ((ImageButton) v).setColorFilter(Color.argb(0xFF, 0x42, 0xA5, 0xF5));
+            } else {
+                ((ImageButton) v).setColorFilter(null);
+            }
+
         }
+
+        /* else if (v.getId() == R.id.favorites) {
+            Log.e("Ashraful", "position:" + position);
+        }*/
     }
 
     public void initRefresh() {
         progressBar.setVisibility(View.GONE);
         empty.setVisibility(View.GONE);
+    }
+
+    public Product getData(int position) {
+        return list.get(position);
     }
 
 //    private void sendMessage(TagPair tagPair) {

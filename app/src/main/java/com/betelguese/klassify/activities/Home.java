@@ -85,7 +85,7 @@ public class Home extends ActionBarActivity implements OnMessageListener {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
+        // ActionBarDrawerToggle ties together the the proper interactionss
         // between the sliding drawer and the action bar app icon
         mDrawerToggle = new MyActionBarDrawerToggle(this, mDrawerLayout);
 
@@ -111,7 +111,7 @@ public class Home extends ActionBarActivity implements OnMessageListener {
     public boolean onPrepareOptionsMenu(Menu menu) {
         //If the nav drawer is open, hide action items related to the content
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+        //menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -124,8 +124,6 @@ public class Home extends ActionBarActivity implements OnMessageListener {
         }
         // Handle action buttons
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

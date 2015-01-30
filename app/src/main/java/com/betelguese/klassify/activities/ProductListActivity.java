@@ -98,9 +98,7 @@ public class ProductListActivity extends ActionBarActivity implements AbsListVie
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             finish();
         }
 
@@ -227,6 +225,8 @@ public class ProductListActivity extends ActionBarActivity implements AbsListVie
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Item Clicked: " + position, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, ProductDetailsActivity.class);
+        intent.putExtra(Config.PRODUCT, adapter.getData(position));
+        startActivity(intent);
     }
 }

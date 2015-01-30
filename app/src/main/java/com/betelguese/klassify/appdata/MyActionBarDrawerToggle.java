@@ -1,6 +1,7 @@
 package com.betelguese.klassify.appdata;
 
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
 
@@ -15,9 +16,9 @@ import com.betelguese.klassify.activities.Home;
  * Shahjalal University of Science and Technology,Sylhet
  */
 public class MyActionBarDrawerToggle extends ActionBarDrawerToggle {
-    private Home actionBarActivity;
+    private ActionBarActivity actionBarActivity;
 
-    public MyActionBarDrawerToggle(Home activity, DrawerLayout drawerLayout) {
+    public MyActionBarDrawerToggle(ActionBarActivity activity, DrawerLayout drawerLayout) {
         super(activity, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         this.actionBarActivity = activity;
     }

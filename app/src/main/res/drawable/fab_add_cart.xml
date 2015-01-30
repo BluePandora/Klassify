@@ -5,7 +5,7 @@
     <item android:drawable="@drawable/fab_add_cart_pressed" android:state_pressed="true"/>
     <item android:drawable="@drawable/fab_add_cart_pressed" android:state_hovered="true"/>
     <item android:drawable="@drawable/fab_add_cart_pressed" android:state_focused="true"/>
-    <item android:drawable="@drawable/fab_add_cart_pressed" android:state_selected="true"/>
+    <item android:drawable="@drawable/fab_add_cart_default" android:state_selected="true"/>
     <item android:drawable="@drawable/fab_add_cart_default"/>
 
 </selector>

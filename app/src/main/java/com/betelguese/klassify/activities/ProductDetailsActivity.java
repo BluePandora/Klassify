@@ -1,5 +1,7 @@
 package com.betelguese.klassify.activities;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
@@ -12,10 +14,13 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.betelguese.klassify.R;
-import com.fedorvlasov.lazylist.Product;
+import com.betelguese.klassify.appdata.ImageSlideAdapter;
+import com.betelguese.klassify.appdata.Product;
 import com.betelguese.klassify.utils.Config;
 import com.betelguese.klassify.utils.PageIndicator;
 import com.widget.CustomTextView;
+
+import java.util.ArrayList;
 
 public class ProductDetailsActivity extends ActionBarActivity {
 
@@ -33,21 +38,30 @@ public class ProductDetailsActivity extends ActionBarActivity {
     ImageButton shareButton;
     Product product;
     private ViewClickListeners mClickListeners;
-    private Runnable	              animateViewPager;
+    private Runnable animateViewPager;
 
 
     // pager
-    private static final long	      ANIM_VIEWPAGER_DELAY	         = 5000;
-    private static final long	      ANIM_VIEWPAGER_DELAY_USER_VIEW	= 10000;
-    private static final CharSequence	NEWS_TAG	                 = "News Tag";
-    private static final CharSequence	NEWS_SUGGESTED	             = "Suggested News";
+    private static final long ANIM_VIEWPAGER_DELAY = 5000;
+    private static final long ANIM_VIEWPAGER_DELAY_USER_VIEW = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initId();
         addListeners();
+        startAnimaion();
+    }
+
+    private void startAnimaion() {
+        if (product.getImage() != null) {
+            viewPager.setAdapter(new ImageSlideAdapter(this, product.getImages(), true));
+            pageIndicator.setViewPager(viewPager);
+            runnable(product.getImages().size());
+            handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
+        }
     }
 
     private void initId() {
@@ -60,9 +74,11 @@ public class ProductDetailsActivity extends ActionBarActivity {
         callButton = (ImageButton) findViewById(R.id.call_advert_user_button);
         smsButton = (ImageButton) findViewById(R.id.sms_advert_user_button);
         shareButton = (ImageButton) findViewById(R.id.share_button);
-        product=getIntent().getParcelableExtra(Config.PRODUCT);
+        product = getIntent().getParcelableExtra(Config.PRODUCT);
+        productNameTextView.setText(product.getTitle());
+        productDetailsTextView.setText(product.getDescription());
+        productPriceTextView.setText("৳" + product.getPrice());
         initImageAnimation();
-
     }
 
     private void initImageAnimation() {
@@ -114,7 +130,6 @@ public class ProductDetailsActivity extends ActionBarActivity {
         };
     }
 
-
     private void addListeners() {
         mClickListeners = new ViewClickListeners();
         favouriteButton.setOnClickListener(mClickListeners);
@@ -125,7 +140,6 @@ public class ProductDetailsActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_details_activity, menu);
         return true;
     }
@@ -138,8 +152,8 @@ public class ProductDetailsActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == android.R.id.home) {
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -150,6 +164,12 @@ public class ProductDetailsActivity extends ActionBarActivity {
         public void onClick(View v) {
             if (v.getId() == R.id.favourite_button) {
                 Log.i(TAG, "favourite_button");
+                v.setSelected(!v.isSelected());
+                if (v.isSelected()) {
+                    ((ImageButton) v).setColorFilter(Color.argb(0xFF, 0x00, 0xC8, 0xF3));
+                } else {
+                    ((ImageButton) v).setColorFilter(Color.argb(0xFF, 0xFF, 0xFF, 0xFF));
+                }
             } else if (v.getId() == R.id.call_advert_user_button) {
                 Log.i(TAG, "call_advert_user_button");
 

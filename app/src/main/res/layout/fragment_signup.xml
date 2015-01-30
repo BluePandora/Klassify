@@ -35,40 +35,50 @@
                 android:padding="10dp">
 
                 <com.widget.CustomEditText
+                    android:id="@+id/fullNameEd"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:textColor="@color/Primary_Black"
                     android:background="@drawable/abc_edit_text_material"
                     android:hint="Full Name" />
 
                 <com.widget.CustomEditText
+                    android:id="@+id/emailEd"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/abc_edit_text_material"
                     android:hint="Email"
+                    android:textColor="@color/Primary_Black"
                     android:inputType="textEmailAddress" />
 
                 <com.widget.CustomEditText
+                    android:id="@+id/mobileNumberEd"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/abc_edit_text_material"
                     android:hint="Mobile Number"
+                    android:textColor="@color/Primary_Black"
                     android:inputType="numberDecimal" />
 
                 <com.widget.CustomEditText
+                    android:id="@+id/passwordEd"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/abc_edit_text_material"
+                    android:textColor="@color/Primary_Black"
                     android:hint="Password" />
 
                 <com.widget.CustomEditText
+                    android:id="@+id/confirmPassEd"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/abc_edit_text_material"
+                    android:textColor="@color/Primary_Black"
                     android:hint="Confirm Password" />
             </LinearLayout>
 
