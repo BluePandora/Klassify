@@ -7,16 +7,12 @@ package com.betelguese.klassify.utils;
 
 public class Config {
     public static final String ARG_POSITION = "position";
-    public static final String	ARG_TITLE	 = "title";
-    public static final String	ARG_TAG	     = "tag";
+    public static final String ARG_TITLE = "title";
+    public static final String ARG_TAG = "tag";
     public static final int TASK_START = 0;
     public static final int TASK_REFRESH = 1;
     public static final int TASK_MORE = 2;
- public static final String ARG_CATEGORY = "categoey";
-    public static final String ARG_CATEGORY_ITEM = "item_category";}
-
-    public static String TABLE_FAVOURITE = "favourite";
-    public static String TABLE_IMAGES = "images";
-    public static String FavTableItem[] = { "productId","title","description","images","email","createdDate","price" };
-    public static String ImageItem[] = { "image_id","imageUrl" };
+    public static final String ARG_CATEGORY = "category";
+    public static final String ARG_CATEGORY_ITEM = "item_category";
+ }
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -109,19 +110,18 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         }
         Product data = list.get(position);
 
-        TextView title = (TextView) v.findViewById(R.id.price);
-        title.setText(String.valueOf("৳" + data.getPrice()));
+        TextView title = (TextView) v.findViewById(R.id.product_name);
+        title.setText(String.valueOf(data.getTitle()));
+
+        TextView price = (TextView) v.findViewById(R.id.product_price);
+        price.setText(String.valueOf("৳" + data.getPrice()));
 
         ImageView image = (ImageView) v.findViewById(R.id.image);
-        //imageLoader.DisplayImage(data.getImage(), image);
+        imageLoader.DisplayImage(data.getImage(), image);
 
-        ImageView save = (ImageView) v.findViewById(R.id.save);
-        ImageView buy = (ImageView) v.findViewById(R.id.buy);
+        ImageButton save = (ImageButton) v.findViewById(R.id.favorite);
         save.setTag(position);
-        buy.setTag(position);
         save.setOnClickListener(this);
-        buy.setOnClickListener(this);
-
         return v;
     }
 
@@ -187,9 +187,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
-        if (v.getId() == R.id.buy) {
-            Log.e("Ashraful", "position:" + position);
-        } else if (v.getId() == R.id.save) {
+        if (v.getId() == R.id.favorite) {
             Log.e("Ashraful", "position:" + position);
         }
     }

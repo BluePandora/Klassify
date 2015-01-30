@@ -13,14 +13,12 @@ import java.util.ArrayList;
  * Shahjalal University of Science and Technology,Sylhet
  */
 public class Product implements Parcelable {
-    private String productId,title, description;
-    ArrayList<String> images;
-    String  email, createdDate;
+    private String productId, title, description;
+    private ArrayList<String> images;
+    private String email, createdDate;
     private double price;
+    private final String noImage = "http://sustcse10.net/ashraful/emarket/product.jpg";
 
-    public Product() {
-
-    }
 
     public Product(String productId, String title, String description, ArrayList<String> images, String email, String createdDate, double price) {
         this.title = title;
@@ -71,9 +69,13 @@ public class Product implements Parcelable {
     }
 
 
-
     public void setImages(ArrayList<String> images) {
-        this.images = images;
+        if (images != null && images.size() != 0)
+            this.images = images;
+        else {
+            this.images = new ArrayList<>();
+            this.images.add(noImage);
+        }
     }
 
     public void setCreatedDate(String createdDate) {
@@ -100,4 +102,9 @@ public class Product implements Parcelable {
         this.title = title;
     }
 
+    public String getImage() {
+        if (images != null && images.size() != 0) {
+            return images.get(0);
+        } else return noImage;
+    }
 }

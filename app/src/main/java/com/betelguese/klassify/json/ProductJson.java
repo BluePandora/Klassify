@@ -18,7 +18,7 @@ public class ProductJson {
     private final String DESCRIPTION = "description";
     private final String PRICE = "price";
     private final String IMAGE = "image";
-    private final String CATEGORY = "category";
+    private final String URL = "url";
     private final String EMAIL = "email";
     private final String CREATED_DATE = "created_date";
 
@@ -31,7 +31,7 @@ public class ProductJson {
 
     public ArrayList<Product> getProducts() {
         ArrayList<Product> news = new ArrayList<Product>();
-        JSONParser parser = new JSONParser();
+        JSONParser parser = null;
         JSONArray productList;
         try {
             parser = new JSONParser();
@@ -42,12 +42,11 @@ public class ProductJson {
                     String id = getData(newsItem, ID);
                     String title = getData(newsItem, TITLE);
                     String description = getData(newsItem, DESCRIPTION);
-                    String image = getData(newsItem, IMAGE);
-                    String category = getData(newsItem, CATEGORY);
+                    ArrayList<String> image = getImages(newsItem, IMAGE);
                     String email = getData(newsItem, EMAIL);
                     double price = Double.parseDouble(getData(newsItem, PRICE));
                     String createdDate = getData(newsItem, CREATED_DATE);
-                    //news.add(new Product(id, title, description, price, image, category, email, createdDate));
+                    news.add(new Product(id, title, description, image, email, createdDate, price));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -56,6 +55,22 @@ public class ProductJson {
             e.printStackTrace();
         }
         return news;
+    }
+
+    private ArrayList<String> getImages(JSONObject item, String key) {
+        ArrayList<String> images = new ArrayList<>();
+        try {
+            JSONArray array = item.getJSONArray(key);
+            for (int i = 0; i < array.length(); i++) {
+                images.add(array.getJSONObject(i).getString(IMAGE));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (images == null) {
+            images = new ArrayList<String>();
+        }
+        return images;
     }
 
 
