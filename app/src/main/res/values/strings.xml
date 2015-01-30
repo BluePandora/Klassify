@@ -14,6 +14,9 @@
     <string name="search_hint">search</string>
 
     <string name="url">http://www.mocky.io/v2/54c7d5ad1f6a7105151514f1</string>
+    <string name="login_url">http://www.mocky.io/v2/54cb2a7a96d6b2a003431eee</string>
+    <string name="signup_url">http://www.mocky.io/v2/54cb2aae96d6b2a703431eef</string>
+    <string name="update_url">http://www.mocky.io/v2/54cb2b0596d6b2a703431ef1</string>
 
     <string-array name="nav_array">
         <item>Explore</item>

@@ -109,18 +109,18 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         }
         Product data = list.get(position);
 
-        TextView title = (TextView) v.findViewById(R.id.price);
+        TextView title = (TextView) v.findViewById(R.id.product_price);
         title.setText(String.valueOf("৳" + data.getPrice()));
 
         ImageView image = (ImageView) v.findViewById(R.id.image);
-        imageLoader.DisplayImage(data.getImage(), image);
+        //imageLoader.DisplayImage(data.getImage(), image);
 
-        ImageView save = (ImageView) v.findViewById(R.id.save);
-        ImageView buy = (ImageView) v.findViewById(R.id.buy);
-        save.setTag(position);
-        buy.setTag(position);
-        save.setOnClickListener(this);
-        buy.setOnClickListener(this);
+        //ImageView save = (ImageView) v.findViewById(R.id.save);
+        //ImageView buy = (ImageView) v.findViewById(R.id.buy);
+        //save.setTag(position);
+        //buy.setTag(position);
+        //save.setOnClickListener(this);
+       // buy.setOnClickListener(this);
 
         return v;
     }
@@ -131,7 +131,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     }
 
     public String getUrl(int position) {
-        return list.get(position).getImage();
+        return null;//list.get(position).getImage();
     }
 
     public int getPointer() {
@@ -187,11 +187,11 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
-        if (v.getId() == R.id.buy) {
+       /* if (v.getId() == R.id.buy) {
             Log.e("Ashraful", "position:" + position);
         } else if (v.getId() == R.id.save) {
             Log.e("Ashraful", "position:" + position);
-        }
+        }*/
     }
 
     public void initRefresh() {
