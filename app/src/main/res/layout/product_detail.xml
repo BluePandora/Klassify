@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -27,7 +27,8 @@
                 android:layout_marginTop="270dp"
                 android:background="@drawable/fab_add_cart"
                 android:gravity="bottom"
-                android:src="@drawable/ic_add_shopping_cart_24dp" />
+                android:src="@drawable/ic_favorite_grey600_24dp"
+                android:tint="@color/Primary_White" />
 
             <com.widget.CustomTextView
                 android:id="@+id/product_name"
@@ -37,7 +38,8 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="15dp"
-                android:text="Dummy Product"
+                android:text="Dummy Name"
+                android:singleLine="true"
                 android:textSize="20sp"
                 app:font="Roboto-Medium.ttf" />
 
@@ -45,6 +47,7 @@
                 android:id="@+id/product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:layout_below="@+id/product_name"
                 android:paddingBottom="10dp"
                 android:paddingLeft="15dp"
@@ -52,17 +55,6 @@
                 android:textColor="#ff009b9b"
                 android:textSize="16sp"
                 app:font="Roboto-Light.ttf" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/dummy_divider"
-                android:layout_alignParentRight="true"
-                android:layout_alignRight="@+id/product_price"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/flat_button"
-                android:padding="10dp"
-                android:src="@drawable/ic_favorite_grey600_24dp" />
 
             <View
                 android:id="@+id/dummy_divider"
@@ -80,10 +72,48 @@
                 android:layout_below="@+id/product_price"
                 android:layout_marginTop="10dp"
                 android:padding="15dp"
-                android:text="Dummy price"
+                android:text="Dummy details"
                 android:textColor="#ff009b9b"
                 android:textSize="16sp"
                 app:font="Roboto-Light.ttf" />
         </RelativeLayout>
     </ScrollView>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/Primary_White"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_holo_button"
+            android:contentDescription="Call"
+            android:padding="15dp"
+            android:src="@drawable/ic_call_24dp"
+            android:text="CALL" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_holo_button"
+            android:contentDescription="Message"
+            android:padding="15dp"
+            android:src="@drawable/ic_message_24dp"
+            android:text="MESSAGE" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_holo_button"
+            android:contentDescription="Share"
+            android:padding="15dp"
+            android:src="@drawable/ic_share_24dp"
+            android:text="SHARE" />
+    </LinearLayout>
+</RelativeLayout>
