@@ -141,6 +141,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="20dp">
+
             <ImageButton
                 android:id="@+id/updateMobileNumB"
                 android:layout_width="wrap_content"
@@ -148,7 +149,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/flat_button"
                 android:gravity="right"
-                android:padding="5dp"
+                android:padding="5dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -247,6 +248,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="20dp">
+
             <ImageButton
                 android:id="@+id/updateLocationB"
                 android:layout_width="wrap_content"
@@ -254,7 +256,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@drawable/flat_button"
                 android:gravity="right"
-                android:padding="5dp"
+                android:padding="5dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
