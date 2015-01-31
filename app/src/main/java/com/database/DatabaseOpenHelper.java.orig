@@ -17,10 +17,17 @@ import java.util.HashMap;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
 
+<<<<<<< HEAD
+    String[] tableName = {"favourite", "images"};
+
+    String[][] tableItem = new String[][]{{"productId", "title", "description", "email", "createdDate", "price", "phone"}, {"productId", "image"}};
+    String[][] tableItemType = new String[][]{{"String  PRIMARY KEY", "String", "String", "String", "String", "String", "String"}, {"String", "String"}};
+=======
     String[] tableName = {"favourite", "images","my_product","my_product_images"};
 
     String[][] tableItem = new String[][]{{"productId", "title", "description", "email", "createdDate", "price", "phone"}, {"productId", "image"} , {"productId", "title", "description", "email", "createdDate", "price", "phone", "category", "subcategory" ,"field"}, {"productId", "image"}};
     String[][] tableItemType = new String[][]{{"String  PRIMARY KEY", "String", "String", "String", "String", "String", "String"}, {"String", "String"}, {"String  PRIMARY KEY", "String", "String", "String", "String", "String", "String", "String", "String", "String"}, {"String", "String"}};
+>>>>>>> origin/developer-tuman
 
 
     String PRODUCT_ID = "productId";
@@ -269,7 +276,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 productList.add(productItem);
             }
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/developer-tuman
+        Log.e("Ashraful", "size" + productList.size());
         return productList;
     }
 

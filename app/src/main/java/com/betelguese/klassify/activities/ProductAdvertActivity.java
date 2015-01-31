@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,9 +27,13 @@ import com.betelguese.klassify.appdata.Category;
 import com.betelguese.klassify.appdata.CategorySpinnerAdapter;
 import com.betelguese.klassify.appdata.CategorySpinnerManager;
 import com.betelguese.klassify.appdata.FieldsAdapter;
+import com.betelguese.klassify.appdata.Product;
 import com.betelguese.klassify.appdata.SubCategory;
 import com.betelguese.klassify.appdata.SubCategorySpinnerAdapter;
 import com.betelguese.klassify.connection.AlertDialogForAnything;
+import com.betelguese.klassify.connection.ConnectionDetector;
+import com.betelguese.klassify.utils.Config;
+import com.database.DatabaseOpenHelper;
 import com.widget.CustomButton;
 import com.widget.CustomEditText;
 
@@ -42,6 +47,8 @@ import java.util.HashMap;
 
 public class ProductAdvertActivity extends ActionBarActivity implements Response.Listener<String>, Response.ErrorListener, AdapterView.OnItemSelectedListener {
 
+    ConnectionDetector cd;
+    DatabaseOpenHelper dbOpenHelper;
     private JsonObjectRequest mJsonObjectRequest;
     private CategorySpinnerAdapter adapter;
     private SubCategorySpinnerAdapter subAdapter;
@@ -57,6 +64,7 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
     private CustomButton addProductButton;
     private ViewListeners mViewListeners;
     ArrayList<String> imagesPath;
+    Product productItem;
 
     @Override
 
@@ -80,6 +88,9 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
     }
 
     private void init() {
+        cd = new ConnectionDetector(this);
+        dbOpenHelper = new DatabaseOpenHelper(this);
+
         catagorySpinner = (Spinner) findViewById(R.id.catagory_spinner);
         subCatagorySpinner = (Spinner) findViewById(R.id.subcatagory_spinner);
         FieldsSpinner = (Spinner) findViewById(R.id.fields_spinner);
@@ -131,7 +142,16 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
     }
 
     private void addProductButtonActivity() {
-        volleyRequest();
+        if(cd.isConnectingToInternet()){
+            volleyRequest();
+        }else{
+            //String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price, boolean isFavourite) {
+
+            productItem = new Product(String.valueOf(System.currentTimeMillis()),productDetailsEditText.getText().toString(),productDetailsEditText.getText().toString(),imagesPath, Config.userInfo.getMobile_number(),Config.userInfo.getEmail(), String.valueOf(System.currentTimeMillis()) , Double.parseDouble(productPriceEditText.getText().toString()) ,false);
+            dbOpenHelper.insertMyProductTable(productItem);
+            cd.showAlertDialogToNetworkConnection(this,"Alert", "No Internet Connection",false);
+        }
+
     }
     ProgressDialog pDialog;
     private void volleyRequest() {
@@ -141,6 +161,7 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Progrssing...");
         pDialog.show();
+
 
         StringRequest strReq = new StringRequest(Request.Method.POST, url, this , this ) {
             @Override
@@ -163,7 +184,9 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
 
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-
+        pDialog.hide();
+        productItem = new Product(String.valueOf(System.currentTimeMillis()),productDetailsEditText.getText().toString(),productDetailsEditText.getText().toString(),imagesPath, Config.userInfo.getMobile_number(),Config.userInfo.getEmail(), String.valueOf(System.currentTimeMillis()) , Double.parseDouble(productPriceEditText.getText().toString()) ,false);
+        dbOpenHelper.insertMyProductTable(productItem);
     }
 
     @Override
@@ -178,6 +201,8 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
             } else {
                 AlertDialogForAnything.showAlertDialogWhenComplte(ProductAdvertActivity.this, "Fail", "Fail to sign up.", false);
                 pDialog.hide();
+                productItem = new Product(String.valueOf(System.currentTimeMillis()),productDetailsEditText.getText().toString(),productDetailsEditText.getText().toString(),imagesPath, Config.userInfo.getMobile_number(),Config.userInfo.getEmail(), String.valueOf(System.currentTimeMillis()) , Double.parseDouble(productPriceEditText.getText().toString()) ,false);
+                dbOpenHelper.insertMyProductTable(productItem);
 
             }
         }catch (JSONException e){
