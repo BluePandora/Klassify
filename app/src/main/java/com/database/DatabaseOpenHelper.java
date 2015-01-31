@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.betelguese.klassify.appdata.Product;
 
@@ -16,9 +17,11 @@ import java.util.HashMap;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
 
-    String[] tableName = {"favourite", "images"};
-    String[][] tableItem;
-    String[][] tableItemType;
+    String[] tableName = {"favourite", "images","my_product","my_product_images"};
+
+    String[][] tableItem = new String[][]{{"productId", "title", "description", "email", "createdDate", "price", "phone"}, {"productId", "image"} , {"productId", "title", "description", "email", "createdDate", "price", "phone", "category", "subcategory" ,"field"}, {"productId", "image"}};
+    String[][] tableItemType = new String[][]{{"String  PRIMARY KEY", "String", "String", "String", "String", "String", "String"}, {"String", "String"}, {"String  PRIMARY KEY", "String", "String", "String", "String", "String", "String", "String", "String", "String"}, {"String", "String"}};
+
 
     String PRODUCT_ID = "productId";
     String TITLE = "title";
@@ -28,30 +31,20 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     String PRICE = "price";
     String PHONE = "phone";
     String IMAGE = "image";
+    String CATEGORY = "category";
+    String SUBCATEGORY = "subcategory";
+    String FIELD = "field";
 
     Context context;
 
     public DatabaseOpenHelper(Context context) {
-        super(context, "Klassify.db", null, 1);
+        super(context, "Klassify.db", null, 2);
         this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        tableItem = new String[tableName.length][];
-        tableItemType = new String[tableName.length][];
-        String tempFavTableItem[] = {"productId", "title", "description", "email", "createdDate", "price"};
-        tableItem[0] = tempFavTableItem;
-        String tempFavTableItemType[] = {"String  PRIMARY KEY", "String", "String", "String", "String", "String"};
-        tableItemType[0] = tempFavTableItemType;
-
-        String tempImageItem[] = {"productId", "image"};
-        tableItem[1] = tempImageItem;
-        String tempImageItemType[] = {"String", "String"};
-        tableItemType[1] = tempImageItemType;
-
         createTable(db, tableName, tableItem, tableItemType);
-
     }
 
     public void createTable(SQLiteDatabase db, String[] tableName, String[][] tableItem, String[][] tableItemType) {
@@ -220,13 +213,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     public void insertFavTable(Product productItem) {
 
-        String value[] = new String[6];
+        String value[] = new String[7];
         value[0] = productItem.getProductId();
         value[1] = productItem.getTitle();
         value[2] = productItem.getDescription();
         value[3] = productItem.getEmail();
         value[4] = productItem.getCreatedDate();
         value[5] = String.valueOf(productItem.getPrice());
+        value[6] = productItem.getPhone();
 
         insertTable(tableName[0], tableItem[0], value);
 
@@ -237,7 +231,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 String valueImage[] = new String[2];
                 valueImage[0] = productItem.getProductId();
                 valueImage[1] = images.get(i);
-
 
                 insertTable(tableName[1], tableItem[1], valueImage);
             }
@@ -255,7 +248,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         ArrayList<HashMap<String, String>> wordList = getAllfromTable(tableName[0], tableItem[0], "", "", "order by productId DESC");
         if (wordList != null) {
             for (int i = 0; i < wordList.size(); i++) {
-                //"productId","title","description","email","createdDate","price" };
                 String productId = wordList.get(i).get(PRODUCT_ID);
                 String title = wordList.get(i).get(TITLE);
                 String description = wordList.get(i).get(DESCRIPTION);
@@ -263,6 +255,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 String createdDate = wordList.get(i).get(CREATED_DATE);
                 String phone = wordList.get(i).get(PHONE);
                 double price = Double.parseDouble(wordList.get(i).get(PRICE));
+
 
                 ArrayList<String> images = new ArrayList<String>();
                 ArrayList<HashMap<String, String>> imagesList = getAllfromTable(tableName[1], tableItem[1], " Where productId = " + productId, "", "");
@@ -272,18 +265,95 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                     }
                 }
 
-                //(String productId, String title, String description, ArrayList<String> images, String email, String createdDate, double price) {
-
-                Product productItem = new Product(productId, title, description, images, phone, email, createdDate, price);
+                Product productItem = new Product(productId, title, description, images, phone, email, createdDate, price, true);
                 productList.add(productItem);
             }
         }
 
+        Log.e("Ashraful", "size" + productList.size());
         return productList;
     }
 
     public boolean existInFavTable(String productId) {
         int checkInt = existInTable(tableName[0], " productId =" + productId);
+
+        if (checkInt == 1) return true;
+        else return false;
+
+    }
+
+    public void insertMyProductTable(Product productItem) {
+
+        String value[] = new String[10];
+        value[0] = productItem.getProductId();
+        value[1] = productItem.getTitle();
+        value[2] = productItem.getDescription();
+        value[3] = productItem.getEmail();
+        value[4] = productItem.getCreatedDate();
+        value[5] = String.valueOf(productItem.getPrice());
+        value[6] = productItem.getPhone();
+
+        value[7] = (productItem.getCategory()==null || productItem.getCategory().isEmpty()? "" : productItem.getCategory());
+        value[8] = (productItem.getSubCategory()==null || productItem.getSubCategory().isEmpty()? "" : productItem.getSubCategory());
+        value[9] = (productItem.getField()==null || productItem.getField().isEmpty()? "" : productItem.getField());
+
+        insertTable(tableName[2], tableItem[2], value);
+
+        ArrayList<String> images = productItem.getImages();
+
+        if (images != null) {
+            for (int i = 0; i < images.size(); i++) {
+                String valueImage[] = new String[2];
+                valueImage[0] = productItem.getProductId();
+                valueImage[1] = images.get(i);
+
+                insertTable(tableName[3], tableItem[3], valueImage);
+            }
+        }
+    }
+
+    public void deleteFromMyProductTable(Product productItem) {
+
+        deleteFromTable(tableName[2], " Where productId = " + productItem.getProductId());
+        deleteFromTable(tableName[3], " Where productId = " + productItem.getProductId());
+    }
+
+    public ArrayList<Product> getAllfromMyProductTable() {
+        ArrayList<Product> productList = new ArrayList<Product>();
+        ArrayList<HashMap<String, String>> wordList = getAllfromTable(tableName[2], tableItem[2], "", "", "order by productId DESC");
+        if (wordList != null) {
+            for (int i = 0; i < wordList.size(); i++) {
+                String productId = wordList.get(i).get(PRODUCT_ID);
+                String title = wordList.get(i).get(TITLE);
+                String description = wordList.get(i).get(DESCRIPTION);
+                String email = wordList.get(i).get(EMAIL);
+                String createdDate = wordList.get(i).get(CREATED_DATE);
+                String phone = wordList.get(i).get(PHONE);
+                double price = Double.parseDouble(wordList.get(i).get(PRICE));
+
+                String category = wordList.get(i).get(CATEGORY);
+                String subcategory = wordList.get(i).get(SUBCATEGORY);
+                String field = wordList.get(i).get(FIELD);
+
+                ArrayList<String> images = new ArrayList<String>();
+                ArrayList<HashMap<String, String>> imagesList = getAllfromTable(tableName[3], tableItem[3], " Where productId = " + productId, "", "");
+                if (imagesList != null) {
+                    for (int j = 0; j < imagesList.size(); j++) {
+                        images.add(imagesList.get(j).get(IMAGE));
+                    }
+                }
+
+                Product productItem = new Product(productId, title, description, images, phone, email, createdDate, price, true, category, subcategory, field);
+                productList.add(productItem);
+            }
+        }
+
+        Log.e("Ashraful", "size" + productList.size());
+        return productList;
+    }
+
+    public boolean existInMyProductTable(String productId) {
+        int checkInt = existInTable(tableName[2], " productId =" + productId);
 
         if (checkInt == 1) return true;
         else return false;

@@ -13,39 +13,95 @@ import java.util.ArrayList;
  * Shahjalal University of Science and Technology,Sylhet
  */
 public class Product implements Parcelable {
-    private String productId, title, description;
-    private ArrayList<String> images;
-    private String email, createdDate;
+    private String productId,title, description;
+    ArrayList<String> images;
+    String  phone,email, createdDate;
     private double price;
-    private final String noImage = "http://sustcse10.net/ashraful/emarket/product.jpg";
-    private String phone;
+    boolean isFavourite;
+    String category;
+    String subCategory;
+    String field;
 
-    public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price) {
-        if (images != null && images.size() != 0)
-            this.images = images;
-        else {
-            this.images = new ArrayList<>();
-            this.images.add(noImage);
-        }
+
+    public Product() {
+
+    }
+
+    public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price, boolean isFavourite, String category, String subCategory, String field) {
+        this.productId = productId;
         this.title = title;
         this.description = description;
+        this.images = images;
+        this.phone = phone;
+        this.email = email;
+        this.createdDate = createdDate;
+        this.price = price;
+        this.isFavourite = isFavourite;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.field = field;
+    }
+
+    public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price, boolean isFavourite) {
+        this.productId = productId;
+        this.title = title;
+        this.description = description;
+        this.images = images;
+        this.phone = phone;
+        this.email = email;
+        this.createdDate = createdDate;
+        this.price = price;
+        this.isFavourite = isFavourite;
+    }
+
+    public Product(String productId, String title, String description, ArrayList<String> images, String email, String createdDate, double price) {
+        this.title = title;
+        this.description = description;
+        this.images = images;
         this.productId = productId;
         this.email = email;
         this.createdDate = createdDate;
         this.price = price;
+    }
+
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public Product(Parcel in) {
-        this.title = in.readString();
-        this.description = in.readString();
-        if (images == null) setImages(null);
-        in.readStringList(images);
-        this.phone = in.readString();
-        this.productId = in.readString();
-        this.email = in.readString();
-        this.createdDate = in.readString();
-        this.price = in.readDouble();
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
     }
 
     @Override
@@ -55,14 +111,7 @@ public class Product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-        dest.writeString(description);
-        dest.writeStringList(images);
-        dest.writeString(phone);
-        dest.writeString(productId);
-        dest.writeString(email);
-        dest.writeString(createdDate);
-        dest.writeDouble(price);
+
     }
 
     public ArrayList<String> getImages() {
@@ -94,13 +143,9 @@ public class Product implements Parcelable {
     }
 
 
+
     public void setImages(ArrayList<String> images) {
-        if (images != null && images.size() != 0)
-            this.images = images;
-        else {
-            this.images = new ArrayList<>();
-            this.images.add(noImage);
-        }
+        this.images = images;
     }
 
     public void setCreatedDate(String createdDate) {
@@ -127,27 +172,4 @@ public class Product implements Parcelable {
         this.title = title;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getImage() {
-        if (images != null && images.size() != 0) {
-            return images.get(0);
-        } else return noImage;
-    }
-
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-        public Product createFromParcel(Parcel in) {
-            return new Product(in);
-        }
-
-        public Product[] newArray(int size) {
-            return new Product[size];
-        }
-    };
 }
