@@ -45,27 +45,7 @@
                         app:font="RobotoCondensed-Regular.ttf" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="15dp">
 
-                    <com.widget.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Last Name"
-                        android:textSize="14sp"
-                        app:font="RobotoCondensed-Bold.ttf" />
-
-                    <com.widget.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Boy"
-                        android:textSize="20sp"
-                        app:font="RobotoCondensed-Regular.ttf" />
-                </LinearLayout>
             </LinearLayout>
 
             <ImageButton
@@ -150,6 +130,19 @@
                 android:gravity="right"
                 android:padding="5dp"
 
+<<<<<<< HEAD
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/flat_button"
+                android:gravity="right"
+                android:padding="5dp"
+                android:src="@drawable/ic_create_24dp" />
+
+=======
+                android:src="@drawable/ic_create_24dp" />
+>>>>>>> origin/devfahad
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -256,6 +249,19 @@
                 android:gravity="right"
                 android:padding="5dp"
 
+<<<<<<< HEAD
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/flat_button"
+                android:gravity="right"
+                android:padding="5dp"
+                android:src="@drawable/ic_create_24dp" />
+
+=======
+                android:src="@drawable/ic_create_24dp" />
+>>>>>>> origin/devfahad
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -4,15 +4,24 @@ package com.betelguese.klassify.model;
  * Created by U on 1/30/2015.
  */
 public class UserInfo {
-    String fullname,email,password,mobile_number,profile_pic,location;
+    String fullname,email,password,mobile_number,profile_pic,dateOfCreation,location;
 
-    public UserInfo(String fullname, String email, String password, String mobile_number, String profile_pic, String location) {
+    public UserInfo(String fullname, String email, String password, String mobile_number, String profile_pic, String dateOfCreation, String location) {
         this.fullname = fullname;
         this.email = email;
         this.password = password;
         this.mobile_number = mobile_number;
         this.profile_pic = profile_pic;
+        this.dateOfCreation = dateOfCreation;
         this.location = location;
+    }
+
+    public String getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    public void setDateOfCreation(String dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
     }
 
     public String getFullname() {

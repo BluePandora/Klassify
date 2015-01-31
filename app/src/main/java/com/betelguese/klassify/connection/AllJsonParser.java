@@ -37,7 +37,7 @@ public class AllJsonParser {
                 else profile_pic = "";
                 String location = data.getString(LOCATION);
 
-                UserInfo userInfo = new UserInfo(fullname,email,password,mobile_number,profile_pic,location);
+                UserInfo userInfo = new UserInfo(fullname,email,password,mobile_number,profile_pic,location,location);
 
                 return userInfo;
 
