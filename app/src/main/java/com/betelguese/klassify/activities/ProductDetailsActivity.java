@@ -204,32 +204,26 @@ public class ProductDetailsActivity extends ActionBarActivity {
                 product.setFavorite(v.isSelected());
             } else if (v.getId() == R.id.call_advert_user_button) {
                 Log.i(TAG, "call_advert_user_button");
-                makecall("01621183616");
-
+                makecall(product.getPhone());
             } else if (v.getId() == R.id.sms_advert_user_button) {
-                Log.i(TAG, "sms_advert_user_button");
-                SmsManager sms = SmsManager.getDefault();
-                sms.sendTextMessage("+8801822454801", null,
-                        "", null, null);
-                Toast.makeText(getApplicationContext(), "SMS Ssent", Toast.LENGTH_LONG).show();
-
-
+                Uri uri = Uri.parse("smsto:" + product.getPhone());
+                Intent it = new Intent(Intent.ACTION_SENDTO, uri);
+                it.putExtra("sms_body", "Hi want to buy your " + product.getTitle());
+                startActivity(it);
             } else if (v.getId() == R.id.share_button) {
                 Log.i(TAG, "share_button");
-               share_add();
-
+                share_add();
             }
         }
 
         private void makecall(String number) {
-            try{
+            try {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + number));
                 startActivity(callIntent);
 
-            }
-            catch (Exception e){
-                Toast.makeText(getApplicationContext(), "Call failed" , Toast.LENGTH_LONG);
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Call failed", Toast.LENGTH_LONG);
             }
         }
     }
@@ -239,7 +233,7 @@ public class ProductDetailsActivity extends ActionBarActivity {
         share.setType("text/plain");
         share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         share.putExtra(Intent.EXTRA_SUBJECT, "Sale Sale Sale ");
-        share.putExtra(Intent.EXTRA_TEXT, "I want to sale my bike proce is tut tut "+"\n"+"http://sustcse10.net/ashraful/emarket/uploads/a.jpg");
+        share.putExtra(Intent.EXTRA_TEXT, "I want to sale my bike proce is tut tut " + "\n" + "http://sustcse10.net/ashraful/emarket/uploads/a.jpg");
         startActivity(Intent.createChooser(share, "Share link!"));
     }
 }

@@ -15,11 +15,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.betelguese.klassify.R;
+
 public class AndroidDownloadManagerActivity extends Activity {
     private long enqueue;
     private DownloadManager dm;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
