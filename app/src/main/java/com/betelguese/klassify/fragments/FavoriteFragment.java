@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -84,6 +85,23 @@ public class FavoriteFragment extends Fragment implements AbsListView.OnScrollLi
         mGridView.setOnScrollListener(this);
         mGridView.setOnItemClickListener(this);
         adapter.isFavoriteFragment(true);
+        // Hide the action bar title
+       /* actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        final String[] dropdownValues = getResources().getStringArray(R.array.sort_array);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item, android.R.id.text1,
+                dropdownValues);
+
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Set up the dropdown list navigation in the action bar.
+        actionBar.setListNavigationCallbacks(arrayAdapter, new ActionBar.OnNavigationListener() {
+            @Override
+            public boolean onNavigationItemSelected(int i, long l) {
+                adapter.sortByField(i);
+                return false;
+            }
+        }); */
     }
 
     protected void displayNews() {

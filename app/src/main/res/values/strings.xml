@@ -25,28 +25,14 @@
         <item>Settings</item>
         <item>Logout</item>
     </string-array>
-    <string-array name="cat_array">
-        <item>Computers</item>
-        <item>Electronics</item>
-        <item>Gift Cards</item>
-        <item>Grocery &amp; Gourmet Food</item>
-        <item>Health &amp; Personal Care</item>
-        <item>Home &amp; Kitchen</item>
-        <item>Industrial &amp; Scientific</item>
-        <item>Magazine Subscriptions</item>
-        <item>Musical Instruments</item>
-        <item>Office Products</item>
-        <item>Patio, Lawn &amp; Garden</item>
-        <item>Pet Supplies</item>
-        <item>Prime Pantry</item>
-        <item>Sports &amp; Outdoors</item>
-        <item>Tools &amp; Home Improvement</item>
-        <item>Toys &amp; Games</item>
-        <item>Video Games</item>
-        <item>Wine</item>
-        <item>Women</item>
-        <item>Men</item>
+
+    <string-array name="sort_array">
+        <item>Most Recent</item>
+        <item>High to Low</item>
+        <item>Low to High</item>
+        <item>Most Viewed</item>
     </string-array>
+
     <string-array name="tab_array">
         <item>Category,Home,Latest,Trending</item>
         <item>Category,Home,Latest,Trending</item>
@@ -86,5 +72,6 @@
     <string name="menu_share_twitter">Share on Twitter</string>
     <string name="title_activity_share">ShareActivity</string>
     <string name="title_activity_sms">Share Via SMS</string>
+    <string name="sort_advert">Sort Adverts</string>
 
 </resources>

@@ -243,6 +243,42 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         this.isFavoriteFragment = isFavoriteFragment;
     }
 
+    public void sortByField(int position) {
+        switch (position) {
+            case 0:
+                sortByMostRecent();
+                break;
+            case 1:
+                sortByPricehighToLow();
+                break;
+            case 2:
+                sortByPriceLowToHigh();
+                break;
+            case 3:
+                sortByMostViewed();
+                break;
+            default:
+                break;
+        }
+        notifyDataSetChanged();
+    }
+
+    private void sortByMostViewed() {
+
+    }
+
+    private void sortByPriceLowToHigh() {
+
+    }
+
+    private void sortByPricehighToLow() {
+
+    }
+
+    private void sortByMostRecent() {
+
+    }
+
 //    private void sendMessage(TagPair tagPair) {
 //        if (listener != null) {
 //            Bundle bundle = new Bundle();

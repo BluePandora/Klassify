@@ -3,6 +3,8 @@ package com.betelguese.klassify.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,10 +12,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -102,6 +107,23 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
                 }
             }
         });
+        // Hide the action bar title
+        /*actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        final String[] dropdownValues = getResources().getStringArray(R.array.sort_array);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item, android.R.id.text1,
+                dropdownValues);
+
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Set up the dropdown list navigation in the action bar.
+        actionBar.setListNavigationCallbacks(arrayAdapter, new ActionBar.OnNavigationListener() {
+            @Override
+            public boolean onNavigationItemSelected(int i, long l) {
+                adapter.sortByField(i);
+                return false;
+            }
+        }); */
     }
 
     protected void displayNews(int pointer, int task) {
@@ -111,6 +133,10 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
         manager.execute(tag);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     private void onLoadMoreItems() {
         Log.e("Ashraful", "On Load More");
