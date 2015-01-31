@@ -2,16 +2,19 @@ package com.betelguese.klassify.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.telephony.gsm.SmsManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.betelguese.klassify.R;
 import com.betelguese.klassify.appdata.ImageSlideAdapter;
@@ -20,8 +23,6 @@ import com.betelguese.klassify.utils.Config;
 import com.betelguese.klassify.utils.PageIndicator;
 import com.database.DatabaseOpenHelper;
 import com.widget.CustomTextView;
-
-import java.util.ArrayList;
 
 public class ProductDetailsActivity extends ActionBarActivity {
 
@@ -203,14 +204,42 @@ public class ProductDetailsActivity extends ActionBarActivity {
                 product.setFavorite(v.isSelected());
             } else if (v.getId() == R.id.call_advert_user_button) {
                 Log.i(TAG, "call_advert_user_button");
+                makecall("01621183616");
 
             } else if (v.getId() == R.id.sms_advert_user_button) {
                 Log.i(TAG, "sms_advert_user_button");
+                SmsManager sms = SmsManager.getDefault();
+                sms.sendTextMessage("+8801822454801", null,
+                        "", null, null);
+                Toast.makeText(getApplicationContext(), "SMS Ssent", Toast.LENGTH_LONG).show();
+
 
             } else if (v.getId() == R.id.share_button) {
                 Log.i(TAG, "share_button");
+               share_add();
 
             }
         }
+
+        private void makecall(String number) {
+            try{
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + number));
+                startActivity(callIntent);
+
+            }
+            catch (Exception e){
+                Toast.makeText(getApplicationContext(), "Call failed" , Toast.LENGTH_LONG);
+            }
+        }
+    }
+
+    private void share_add() {
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        share.putExtra(Intent.EXTRA_SUBJECT, "Sale Sale Sale ");
+        share.putExtra(Intent.EXTRA_TEXT, "I want to sale my bike proce is tut tut "+"\n"+"http://sustcse10.net/ashraful/emarket/uploads/a.jpg");
+        startActivity(Intent.createChooser(share, "Share link!"));
     }
 }

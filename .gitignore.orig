@@ -1,0 +1,16 @@
+.gradle
+.idea
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/app/app.iml
+/CWCProject.iml
+<<<<<<< HEAD
+library/build/intermediates/bundles/release/classes.jar
+library/build/outputs/aar/library-release.aar
+settings.gradle
+=======
+/library/build/intermediates/
+>>>>>>> origin/feature/share
