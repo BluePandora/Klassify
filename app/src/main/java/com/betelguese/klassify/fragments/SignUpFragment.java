@@ -104,6 +104,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener, Re
             if (showWarningDialog()) {
                 volleyRequest();
             }
+        }else{
+            cd.showAlertDialogToNetworkConnection(getActivity(),"Alert","No Internet Access",false);
         }
 
     }

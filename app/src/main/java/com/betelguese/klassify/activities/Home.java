@@ -2,6 +2,7 @@ package com.betelguese.klassify.activities;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,10 +28,16 @@ import com.betelguese.klassify.appdata.MyActionBarDrawerToggle;
 import com.betelguese.klassify.appdata.NavAdapter;
 import com.betelguese.klassify.fragments.BaseFragment;
 import com.betelguese.klassify.fragments.FavoriteFragment;
+import com.betelguese.klassify.fragments.MyAdFragment;
+import com.betelguese.klassify.model.UserInfo;
 import com.betelguese.klassify.utils.Config;
 import com.betelguese.klassify.utils.OnMessageListener;
+import com.fedorvlasov.lazylist.ImageLoader;
+import com.widget.CircularImageView;
 
 import java.util.List;
+
+import static android.view.View.OnClickListener;
 
 
 /**
@@ -38,7 +45,7 @@ import java.util.List;
  * Shahjalal University of Science and Technology,Sylhet
  */
 
-public class Home extends ActionBarActivity implements OnMessageListener {
+public class Home extends ActionBarActivity implements OnMessageListener, OnClickListener {
     public ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -47,7 +54,8 @@ public class Home extends ActionBarActivity implements OnMessageListener {
     private CharSequence mTitle;
     private String[] mTitles;
     private TextView fullName, email;
-    private ImageView profilePicture;
+    private CircularImageView profilePicture;
+    private ImageLoader imageLoader;
 
     public static boolean active = false;
 
@@ -55,6 +63,7 @@ public class Home extends ActionBarActivity implements OnMessageListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity_layout);
+        imageLoader = new ImageLoader(this);
         mTitle = mDrawerTitle = getTitle();
         mTitles = getResources().getStringArray(R.array.nav_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -62,11 +71,16 @@ public class Home extends ActionBarActivity implements OnMessageListener {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         View header = getLayoutInflater().inflate(R.layout.account, null);
+        header.setOnClickListener(this);
         fullName = (TextView) header.findViewById(R.id.title);
         email = (TextView) header.findViewById(R.id.email);
-        profilePicture = (ImageView) header.findViewById(R.id.image);
-        fullName.setText("Ashraful " + "Islam");
-        email.setText("ashrafulcse.sust@gmail.com");
+        profilePicture = (CircularImageView) header.findViewById(R.id.image);
+        if (Config.userInfo == null) {
+            Config.userInfo = new UserInfo("", "", "", "", "", "", "");
+        }
+        fullName.setText(Config.userInfo.getFullname());
+        email.setText(Config.userInfo.getEmail());
+        imageLoader.DisplayImage(Config.userInfo.getProfile_pic(), profilePicture);
         mDrawerList.addHeaderView(header, mTitle, false);
         // set a custom shadow that overlays the main content when the drawer
         // opens
@@ -138,7 +152,7 @@ public class Home extends ActionBarActivity implements OnMessageListener {
 
 
     private void selectItem(int position) {
-        if (position != 0) {
+        if (position != 0 && position != 4 && position != 5) {
             // update the main content by replacing fragments
             Fragment fragment = chooseFragment(position);
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -147,32 +161,44 @@ public class Home extends ActionBarActivity implements OnMessageListener {
             mDrawerList.setItemChecked(position, true);
             mDrawerLayout.closeDrawer(mDrawerList);
             setTitle(mTitles[position - 1]);
+        } else {
+            chooseFragment(position);
         }
 
     }
 
     private Fragment chooseFragment(int position) {
         Fragment fragment = null;
-        switch (position) {
-            case 1:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
-                break;
-            case 2:
-                fragment = new FavoriteFragment();
-                setArgument(fragment, position - 1);
-                break;
-            case 3:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
-                break;
-            case 4:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
-                break;
-            default:
-                fragment = new BaseFragment();
-                setArgument(fragment, position - 1);
+        try {
+
+            switch (position) {
+                case 1:
+                    fragment = new BaseFragment();
+                    setArgument(fragment, position - 1);
+                    break;
+                case 2:
+                    fragment = new FavoriteFragment();
+                    setArgument(fragment, position - 1);
+                    break;
+                case 3:
+                    fragment = new MyAdFragment();
+                    setArgument(fragment, position - 1);
+                    break;
+                case 4:
+                    Intent intent = new Intent(this, ProductAdvertActivity.class);
+                    startActivity(intent);
+                    break;
+                case 5:
+                    Intent logInintent = new Intent(this, LogInActivity.class);
+                    finish();
+                    startActivity(logInintent);
+                    break;
+                default:
+                    fragment = new BaseFragment();
+                    setArgument(fragment, position - 1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return fragment;
     }
@@ -236,6 +262,12 @@ public class Home extends ActionBarActivity implements OnMessageListener {
     @Override
     public void onReceiveMessage(Bundle bundle) {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, UpdateProfileActivity.class);
+        startActivity(intent);
     }
 
     /* The click listener for ListView in the navigation drawer */

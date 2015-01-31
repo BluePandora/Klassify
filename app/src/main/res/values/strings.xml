@@ -14,17 +14,18 @@
     <string name="search_hint">search</string>
     <string name="url">http://www.mocky.io/v2/54cc07c696d6b24218431fcd</string>
     <string name="url_product">http://www.mocky.io/v2/54cc07c696d6b24218431fcd/products/</string>
-    <string name="login_url">http://www.mocky.io/v2/54cb2a7a96d6b2a003431eee</string>
+    <string name="login_url">http://www.mocky.io/v2/54cc9a8622f5cf6f0607e115</string>
     <string name="signup_url">http://www.mocky.io/v2/54cb2aae96d6b2a703431eef</string>
     <string name="update_url">http://www.mocky.io/v2/54cb2b0596d6b2a703431ef1</string>
     <string name="url_category">http://www.mocky.io/v2/54cb63af96d6b2a008431f37</string>
     <string name="post_product_url">http://www.mocky.io/v2/54cb2aae96d6b2a703431eef</string>
+    <string name="url_my_ad">http://www.mocky.io/v2/54cbba4296d6b23c12431f8c</string>
 
     <string-array name="nav_array">
         <item>Explore</item>
         <item>Favourites</item>
-        <item>Cart</item>
-        <item>Settings</item>
+        <item>My Adv.</item>
+        <item>Post Adv.</item>
         <item>Logout</item>
     </string-array>
 
@@ -43,7 +44,7 @@
         <item>Category,Home,Editors,Trending</item>
     </string-array>
     <string-array name="tag_array">
-        <item>http://www.mocky.io/v2/54cc1d3196d6b2091a431fd5,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd</item>
+        <item>http://www.mocky.io/v2/54cc1d3196d6b2091a431fd5,http://www.mocky.io/v2/54cbba4296d6b23c12431f8c,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cbba4296d6b23c12431f8c</item>
         <item>http://www.mocky.io/v2/54cc1d3196d6b2091a431fd5,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd</item>
         <item>http://www.mocky.io/v2/54cc1d3196d6b2091a431fd5,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd</item>
         <item>http://www.mocky.io/v2/54cc1d3196d6b2091a431fd5,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd</item>

@@ -67,9 +67,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-public class UpdateProfileActivity extends ActionBarActivity implements View.OnClickListener,Response.Listener<String> ,Response.ErrorListener {
+public class UpdateProfileActivity extends ActionBarActivity implements View.OnClickListener, Response.Listener<String>, Response.ErrorListener {
 
-    private ProgressDialog dialog ;
+    private ProgressDialog dialog;
 
     UserInfo userInfo = null;
 
@@ -77,8 +77,8 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
     ImageLoader imageLoder;
     ImageView proPicImageView;
     ImageButton takePicCameraB;
-    CustomTextView fullNameTxt,emailTxt,mobileNumberTxt,dateOfCreationTxt,locationTxt;
-    ImageButton updateFullNameB,updateMobileNumB,updateLocationB;
+    CustomTextView fullNameTxt, emailTxt, mobileNumberTxt, dateOfCreationTxt, locationTxt;
+    ImageButton updateFullNameB, updateMobileNumB, updateLocationB;
 
     ConnectionDetector cd;
 
@@ -86,8 +86,8 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_profile);
-
-        imageLoder = new ImageLoader(this,R.drawable.person);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        imageLoder = new ImageLoader(this, R.drawable.person);
         init();
         addListener();
         setDataToComponent();
@@ -106,15 +106,15 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
         proPicImageView = (ImageView) findViewById(R.id.proPicImgView);
         takePicCameraB = (ImageButton) findViewById(R.id.takePicCameraB);
 
-        fullNameTxt=(CustomTextView)findViewById(R.id.fullNameTxt);
-        emailTxt= (CustomTextView)findViewById( R.id.emailTxt);
+        fullNameTxt = (CustomTextView) findViewById(R.id.fullNameTxt);
+        emailTxt = (CustomTextView) findViewById(R.id.emailTxt);
         mobileNumberTxt = (CustomTextView) findViewById(R.id.mobileNumberTxt);
         dateOfCreationTxt = (CustomTextView) findViewById(R.id.dateOfCreationTxt);
         locationTxt = (CustomTextView) findViewById(R.id.locationTxt);
 
         updateFullNameB = (ImageButton) findViewById(R.id.updateFullNameB);
         updateMobileNumB = (ImageButton) findViewById(R.id.updateMobileNumB);
-        updateLocationB= (ImageButton) findViewById(R.id.updateLocationB);
+        updateLocationB = (ImageButton) findViewById(R.id.updateLocationB);
 
         show(MapViewGone);
         initMap();
@@ -132,12 +132,12 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
         emailTxt.setText(Config.userInfo.getEmail());
         mobileNumberTxt.setText(Config.userInfo.getMobile_number());
         dateOfCreationTxt.setText(Config.userInfo.getDateOfCreation());
-        if(Config.userInfo.getLocation()==null || Config.userInfo.getLocation().isEmpty() )
+        if (Config.userInfo.getLocation() == null || Config.userInfo.getLocation().isEmpty())
             locationTxt.setText("Please add your location");
         else locationTxt.setText(Config.userInfo.getLocation());
 
-        if(Config.userInfo.getProfile_pic()==null || Config.userInfo.getProfile_pic().isEmpty()){}
-        else imageLoder.DisplayImage(Config.userInfo.getProfile_pic() , proPicImageView );
+        if (Config.userInfo.getProfile_pic() == null || Config.userInfo.getProfile_pic().isEmpty()) {
+        } else imageLoder.DisplayImage(Config.userInfo.getProfile_pic(), proPicImageView);
     }
 
 
@@ -150,9 +150,11 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-         int id = item.getItemId();
+        int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == android.R.id.home) {
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -160,17 +162,17 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.takePicCameraB:
                 takePicCameraBActivity();
                 break;
             case R.id.updateFullNameB:
                 updateFullNameButtonActivity();
                 break;
-            case R.id.updateMobileNumB :
+            case R.id.updateMobileNumB:
                 updateMobileNumBActivity();
                 break;
-            case R.id.updateLocationB :
+            case R.id.updateLocationB:
                 updateLocationBActivity();
                 break;
         }
@@ -194,20 +196,20 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                 .playOn(findViewById(R.id.map_fragment_layout_id));
     }
 
-    int UPDATE_FULLNAME=0;
+    int UPDATE_FULLNAME = 0;
     int UPDATE_MOBILE_NUMBER = 1;
     int UPDATE_LOCATION = 3;
     int UPDATE_PROFILE_PIC = 4;
 
-    public void alerDialogForEditComponent(final int updateComponent){
+    public void alerDialogForEditComponent(final int updateComponent) {
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(R.layout.pop_up_layout, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(promptsView);
         CustomTextView headerTxt = (CustomTextView) promptsView.findViewById(R.id.header);
-        if(updateComponent==UPDATE_FULLNAME){
+        if (updateComponent == UPDATE_FULLNAME) {
             headerTxt.setText("Enter your Full Name");
-        }else if(updateComponent == UPDATE_MOBILE_NUMBER){
+        } else if (updateComponent == UPDATE_MOBILE_NUMBER) {
             headerTxt.setText("Update your Mobile Number");
         }
 
@@ -255,7 +257,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
         dialog.setMessage("Progrssing...");
         dialog.show();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, url, this , this ) {
+        StringRequest strReq = new StringRequest(Request.Method.POST, url, this, this) {
             @Override
             protected HashMap<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<String, String>();
@@ -264,7 +266,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                 params.put("password", userInfo.getPassword());
                 params.put("mobile_number", mobileNumberTxt.getText().toString().trim());
                 params.put("profile_pic", userInfo.getProfile_pic());
-                params.put("creation_of_date",  userInfo.getDateOfCreation());
+                params.put("creation_of_date", userInfo.getDateOfCreation());
 
                 params.put("location", userInfo.getLocation());
 
@@ -274,8 +276,9 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    int MapViewGone=0;
-    int MapViewShow=1;
+    int MapViewGone = 0;
+    int MapViewShow = 1;
+
     private void show(int i) {
         // TODO Auto-generated method stub
         if (i == MapViewGone) {
@@ -332,7 +335,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                                                 .duration(700)
                                                 .playOn(findViewById(R.id.map_fragment_layout_id));
 
-                                        userInfo.setLocation(donor_latitude+","+donor_longitude);
+                                        userInfo.setLocation(donor_latitude + "," + donor_longitude);
                                         volleyRequest(UPDATE_LOCATION);
 
                                     }
@@ -403,7 +406,6 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
     String selectedImagePath;
 
 
-
     private void startDialog() {
         AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this);
         myAlertDialog.setTitle("Upload Pictures Option");
@@ -455,7 +457,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                         bitmap = BitmapFactory.decodeFile(fileSrc); // load
                         // preview
                         // image
-                        bitmap = Bitmap.createScaledBitmap(bitmap,100, 100, false);
+                        bitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, false);
                         saveFile(bitmap);
                         proPicImageView.setImageBitmap(bitmap);
                     } else {
@@ -487,10 +489,10 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
 
                     Cursor cursor = getContentResolver()
                             .query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                                    new String[] {
+                                    new String[]{
                                             MediaStore.Images.Media.DATA,
                                             MediaStore.Images.Media.DATE_ADDED,
-                                            MediaStore.Images.ImageColumns.ORIENTATION },
+                                            MediaStore.Images.ImageColumns.ORIENTATION},
                                     MediaStore.Images.Media.DATE_ADDED, null, "date_added ASC");
                     if (cursor != null && cursor.moveToFirst()) {
                         do {
@@ -501,7 +503,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                         cursor.close();
                     }
 
-                    bitmap = Bitmap.createScaledBitmap(bitmap, 100,100, false);
+                    bitmap = Bitmap.createScaledBitmap(bitmap, 100, 100, false);
                     saveFile(bitmap);
                     proPicImageView.setImageBitmap(bitmap);
                 } else if (data.getExtras() == null) {
@@ -529,7 +531,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
 
     }
 
-    public void saveFile(Bitmap bmp){
+    public void saveFile(Bitmap bmp) {
 
         try {
             String file_path = Environment.getExternalStorageDirectory().getAbsolutePath() +
@@ -545,14 +547,14 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
             fOut.close();
 
             uploadFile(file.getAbsolutePath());
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
 
     private int serverResponseCode = 0;
     private String upLoadServerUri = "http://nxtgeninteractive.com/nxtgenbv/UploadToServer.php";
-    private String imagepathServer="http://nxtgeninteractive.com/nxtgenbv/photo/";
+    private String imagepathServer = "http://nxtgeninteractive.com/nxtgenbv/photo/";
 
     public int uploadFile(String sourceFileUri) {
 
@@ -581,9 +583,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
 
             return 0;
 
-        }
-        else
-        {
+        } else {
             try {
 
                 // open a URL connection to the Servlet
@@ -638,16 +638,16 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                 Log.i("uploadFile", "HTTP Response is : "
                         + serverResponseMessage + ": " + serverResponseCode);
 
-                if(serverResponseCode == 200){
+                if (serverResponseCode == 200) {
 
                     runOnUiThread(new Runnable() {
                         public void run() {
                             String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
-                                    +" F:/wamp/wamp/www/uploads";
+                                    + " F:/wamp/wamp/www/uploads";
                             //messageText.setText(msg);
                             Toast.makeText(UpdateProfileActivity.this, "File Upload Complete.", Toast.LENGTH_SHORT).show();
 
-                            userInfo.setProfile_pic(imagepathServer+fileName);
+                            userInfo.setProfile_pic(imagepathServer + fileName);
                             volleyRequest(UPDATE_PROFILE_PIC);
 
                         }
@@ -683,7 +683,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                         Toast.makeText(UpdateProfileActivity.this, "Got Exception : see logcat ", Toast.LENGTH_SHORT).show();
                     }
                 });
-                Log.e("Upload file to server Exception", "Exception : "  + e.getMessage(), e);
+                Log.e("Upload file to server Exception", "Exception : " + e.getMessage(), e);
             }
             dialog.hide();
             return serverResponseCode;
@@ -724,7 +724,7 @@ public class UpdateProfileActivity extends ActionBarActivity implements View.OnC
                 dialog.hide();
 
             }
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 

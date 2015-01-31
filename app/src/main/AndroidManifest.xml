@@ -42,10 +42,16 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".activities.UpdateProfileActivity"
+            android:label="Profile"
+            android:theme="@style/ProductDetailsTheme" />
+        <activity
             android:name="com.betelguese.klassify.activities.LogInActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme" />
+
+
 
         <activity
             android:name="com.betelguese.klassify.activities.Home"

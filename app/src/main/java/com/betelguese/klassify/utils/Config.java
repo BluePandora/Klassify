@@ -39,8 +39,8 @@ public class Config {
 
     public static String TABLE_FAVOURITE = "favourite";
     public static String TABLE_IMAGES = "images";
-    public static String FavTableItem[] = { "productId","title","description","images","email","createdDate","price" };
-    public static String ImageItem[] = { "image_id","imageUrl" };
+    public static String FavTableItem[] = {"productId", "title", "description", "images", "email", "createdDate", "price"};
+    public static String ImageItem[] = {"image_id", "imageUrl"};
 
 
     public static final String ARG_CATEGORY = "category";
@@ -52,17 +52,17 @@ public class Config {
     public static final String ARG_NAV_POSITION = "nav_position";
     public static final int TASK_FAVORITE = 3;
 
-    public static final UserInfo userInfo=null;
+    public static UserInfo userInfo = null;
 
 
     public static void volleyRequest(Context context) {
         String tag_string_req = "string_req";
-        String url = "http://www.mocky.io/v2/54cb2aae96d6b2a703431eef" ;
+        String url = "http://www.mocky.io/v2/54cb2aae96d6b2a703431eef";
 
         //Response.Listener<String> ,Response.ErrorListener
         final DatabaseOpenHelper dbOpenHelper = new DatabaseOpenHelper(context);
         final ArrayList<Product> products = dbOpenHelper.getAllfromMyProductTable();
-        for(int i=0;i<products.size();i++) {
+        for (int i = 0; i < products.size(); i++) {
             final Product product = products.get(i);
             StringRequest strReq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
@@ -79,7 +79,7 @@ public class Config {
 
 
                         }
-                    }catch (JSONException e){
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
@@ -97,7 +97,7 @@ public class Config {
                     HashMap<String, String> params = new HashMap<String, String>();
                     params.put("product_name", product.getTitle());
                     params.put("price", String.valueOf(product.getPrice()));
-                    params.put("category",product.getCategory());
+                    params.put("category", product.getCategory());
                     params.put("subcategory", product.getSubCategory());
                     params.put("field", product.getField());
                     params.put("product_detail", product.getDescription());

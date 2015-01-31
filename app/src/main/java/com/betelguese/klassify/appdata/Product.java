@@ -20,6 +20,9 @@ public class Product implements Parcelable {
     private final String noImage = "http://sustcse10.net/ashraful/emarket/product.jpg";
     private String phone;
     private boolean isFavorite;
+    private String category;
+    private String subCategory;
+    private String field;
 
     public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price, boolean isFavorite) {
         if (images != null && images.size() != 0)
@@ -36,6 +39,26 @@ public class Product implements Parcelable {
         this.price = price;
         this.phone = phone;
         this.isFavorite = isFavorite;
+    }
+
+    public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price, boolean isFavorite, String category, String subcategory, String field) {
+        if (images != null && images.size() != 0)
+            this.images = images;
+        else {
+            this.images = new ArrayList<>();
+            this.images.add(noImage);
+        }
+        this.title = title;
+        this.description = description;
+        this.productId = productId;
+        this.email = email;
+        this.createdDate = createdDate;
+        this.price = price;
+        this.phone = phone;
+        this.isFavorite = isFavorite;
+        this.category = category;
+        this.subCategory = subcategory;
+        this.field = field;
     }
 
     public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price) {
@@ -65,6 +88,33 @@ public class Product implements Parcelable {
         this.createdDate = in.readString();
         this.price = in.readDouble();
         this.isFavorite = in.readByte() != 0;
+        this.category = in.readString();
+        this.subCategory = in.readString();
+        this.field = in.readString();
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getField() {
+        return field;
     }
 
     public boolean isFavorite() {
@@ -87,6 +137,9 @@ public class Product implements Parcelable {
         dest.writeString(createdDate);
         dest.writeDouble(price);
         dest.writeByte((byte) (isFavorite ? 1 : 0));
+        dest.writeString(category);
+        dest.writeString(subCategory);
+        dest.writeString(field);
     }
 
     public ArrayList<String> getImages() {

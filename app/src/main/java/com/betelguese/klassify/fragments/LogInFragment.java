@@ -60,7 +60,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener, Res
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_log_in, container, false);
         }
-
         init();
         addListener();
 
@@ -116,6 +115,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener, Res
             if (showWarningDialog()) {
                 volleyRequest();
             }
+        }else{
+            cd.showAlertDialogToNetworkConnection(getActivity(),"Alert","No Internet Access",false);
         }
 
     }
