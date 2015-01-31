@@ -97,7 +97,13 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/ProductDetailsTheme" />
 
-         
+	activity android:name="com.betelguese.klassify.activities.util.CustomGalleryActivity" >
+            <intent-filter>
+                <action android:name="luminous.ACTION_MULTIPLE_PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -38,7 +38,11 @@
                 android:name="android.app.default_searchable"
                 android:value="com.betelguese.klassify.activities.ProductListActivity" />
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.CategoryHome"
@@ -80,27 +84,31 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_image_slider"
             android:theme="@style/MyFullscreenTheme" />
-<<<<<<< HEAD
-
-        <activity
-            android:name=".activities.ProductAdvertActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/ProductDetailsTheme" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            </activity>
-=======
         <activity
             android:name=".activities.AndroidDownloadManagerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_image_slider"
             android:theme="@style/MyFullscreenTheme" />
->>>>>>> origin/feature/share
 
+
+	
+        <activity
+            android:name=".activities.ProductAdvertActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/ProductDetailsTheme" />
+
+<<<<<<< HEAD
+         
+=======
+        <activity android:name="com.betelguese.klassify.activities.util.CustomGalleryActivity" >
+            <intent-filter>
+                <action android:name="luminous.ACTION_MULTIPLE_PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+>>>>>>> origin/developer-tuman
     </application>
 
 </manifest>
