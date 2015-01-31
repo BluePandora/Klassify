@@ -26,6 +26,7 @@ import com.betelguese.klassify.R;
 import com.betelguese.klassify.appdata.MyActionBarDrawerToggle;
 import com.betelguese.klassify.appdata.NavAdapter;
 import com.betelguese.klassify.fragments.BaseFragment;
+import com.betelguese.klassify.fragments.FavoriteFragment;
 import com.betelguese.klassify.utils.Config;
 import com.betelguese.klassify.utils.OnMessageListener;
 
@@ -158,7 +159,7 @@ public class Home extends ActionBarActivity implements OnMessageListener {
                 setArgument(fragment, position - 1);
                 break;
             case 2:
-                fragment = new BaseFragment();
+                fragment = new FavoriteFragment();
                 setArgument(fragment, position - 1);
                 break;
             case 3:

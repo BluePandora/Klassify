@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.betelguese.klassify.R;
 import com.betelguese.klassify.utils.OnMessageListener;
+import com.database.DatabaseOpenHelper;
 import com.fedorvlasov.lazylist.ImageLoader;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
     private OnMessageListener listener;
     private SwipeRefreshLayout view;
     public boolean mHasRequestedMore;
+    private DatabaseOpenHelper db;
 
 
     public ProductAdapter(Context context, ProgressBar progressBar, SwipeRefreshLayout empty, int navPosition, SwipeRefreshLayout view, OnMessageListener listener) {
@@ -50,6 +52,7 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         this.view = view;
         imageLoader = new ImageLoader(context);
         check = new SparseBooleanArray();
+        db = new DatabaseOpenHelper(context);
     }
 
     public void initLoad() {
@@ -121,6 +124,8 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         imageLoader.DisplayImage(data.getImage(), image);
 
         ImageButton save = (ImageButton) v.findViewById(R.id.favorites);
+        save.setSelected(data.isFavorite());
+        updateFavorite(save);
         save.setTag(position);
         save.setOnClickListener(this);
         return v;
@@ -185,24 +190,42 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
         return list;
     }
 
+    private void updateFavorite(View v) {
+        if (v.isSelected()) {
+            ((ImageButton) v).setColorFilter(Color.argb(0xFF, 0x42, 0xA5, 0xF5));
+        } else {
+            ((ImageButton) v).setColorFilter(null);
+        }
+    }
+
     @Override
     public void onClick(View v) {
-        //int position = (Integer) v.getTag();
+        int position = (Integer) v.getTag();
         if (v.getId() == R.id.favorites) {
-            Log.e("Ashraful", "position: Tada ");
             v.setSelected(!v.isSelected());
             if (v.isSelected()) {
-                ((ImageButton) v).setColorFilter(Color.argb(0xFF, 0x42, 0xA5, 0xF5));
+                db.insertFavTable(list.get(position));
             } else {
-                ((ImageButton) v).setColorFilter(null);
+                db.deleteFromFavTable(list.get(position));
             }
+            setFavorite(position, v.isSelected());
+            updateFavorite(v);
+        }
+    }
 
+    public void setFavorite(int position, boolean isFavorite) {
+        try {
+            list.get(position).setFavorite(isFavorite);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        /* else if (v.getId() == R.id.favorites) {
-            Log.e("Ashraful", "position:" + position);
-        }*/
+        if (this.isFavoriteFragment && !isFavorite) {
+            list.remove(position);
+            this.notifyDataSetChanged();
+        }
     }
+
 
     public void initRefresh() {
         progressBar.setVisibility(View.GONE);
@@ -211,6 +234,13 @@ public class ProductAdapter extends BaseAdapter implements View.OnClickListener 
 
     public Product getData(int position) {
         return list.get(position);
+    }
+
+
+    boolean isFavoriteFragment;
+
+    public void isFavoriteFragment(boolean isFavoriteFragment) {
+        this.isFavoriteFragment = isFavoriteFragment;
     }
 
 //    private void sendMessage(TagPair tagPair) {

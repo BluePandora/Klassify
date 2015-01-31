@@ -34,16 +34,13 @@ import java.util.ArrayList;
  * Shahjalal University of Science and Technology,Sylhet
  */
 
-public class BaseTabFragment extends Fragment implements AbsListView.OnScrollListener, AbsListView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, OnMessageListener {
+public class FavoriteFragment extends Fragment implements AbsListView.OnScrollListener, AbsListView.OnItemClickListener, OnMessageListener {
     private final String TAG = "Ashraful";
     protected ProductAdapter adapter;
     private StaggeredGridView mGridView;
     protected String tag;
     private int navPosition;
-    private int howMany = 25;
-    private int min = 6;
     private SwipeRefreshLayout swipeContainer;
-    private String url;
     private final String SAVE_VALUE_KEY = "save";
     private int mLastFirstVisibleItem;
     private ActionBar actionBar;
@@ -61,7 +58,7 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
             adapter.setData(news);
             adapter.invalidate();
         } else {
-            displayNews(-1, Config.TASK_START);
+            displayNews();
         }
         return v;
     }
@@ -75,56 +72,26 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
 
     private void initView(View v, Bundle save) {
         actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
-        url = getResources().getString(R.string.url);
         navPosition = getArguments().getInt(Config.ARG_POSITION);
         if (tag == null)
             tag = getArguments().getString(Config.ARG_TAG);
         SwipeRefreshLayout empty = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_empty);
         ProgressBar progressBar = (ProgressBar) v.findViewById(R.id.load);
         mGridView = (StaggeredGridView) v.findViewById(R.id.list);
-        LayoutInflater layoutInflater = getLayoutInflater(save);
-
-        View footer = layoutInflater.inflate(R.layout.list_item_header_footer, null);
-        mGridView.addFooterView(footer);
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_layout);
-        swipeContainer.setOnRefreshListener(this);
         adapter = new ProductAdapter(getActivity(), progressBar, empty, navPosition, swipeContainer, listener);
         mGridView.setAdapter(adapter);
         mGridView.setOnScrollListener(this);
         mGridView.setOnItemClickListener(this);
-        empty.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (!adapter.mHasRequestedMore) {
-                    if (adapter.getCount() < min)
-                        howMany += min;
-                    displayNews(-1, Config.TASK_START);
-                }
-            }
-        });
+        adapter.isFavoriteFragment(true);
     }
 
-    protected void displayNews(int pointer, int task) {
+    protected void displayNews() {
         adapter.mHasRequestedMore = true;
-        ProductManager manager = new ProductManager(getActivity(), adapter, task);
-        //manager.execute(url + "?tag=" + tag + "&pointer=" + pointer + "&howMany=" + howMany);
+        ProductManager manager = new ProductManager(getActivity(), adapter, Config.TASK_FAVORITE);
         manager.execute(tag);
     }
 
-
-    private void onLoadMoreItems() {
-        Log.e("Ashraful", "On Load More");
-        displayNews(adapter.getPointer(), Config.TASK_MORE);
-    }
-
-    @Override
-    public void onRefresh() {
-        if (!adapter.mHasRequestedMore) {
-            if (adapter.getCount() < min)
-                howMany += min;
-            displayNews(-1, Config.TASK_REFRESH);
-        }
-    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -133,13 +100,6 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        // our handling
-        if (!adapter.mHasRequestedMore) {
-            int lastInScreen = firstVisibleItem + visibleItemCount;
-            if (lastInScreen >= totalItemCount) {
-                onLoadMoreItems();
-            }
-        }
 
         if (view.getId() == mGridView.getId()) {
             int currentFirstVisibleItem = mGridView.getFirstVisiblePosition();
@@ -178,10 +138,6 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
         }
     }
 
-    public void refreshData(String tag) {
-        this.tag = tag;
-        displayNews(-1, Config.TASK_START);
-    }
 
     /**
      * Callback method to be invoked when an item in this AdapterView has
@@ -202,7 +158,7 @@ public class BaseTabFragment extends Fragment implements AbsListView.OnScrollLis
         intent.putExtra(Config.PRODUCT, adapter.getData(position));
         intent.putExtra(Config.ARG_POSITION, position);
         intent.putExtra(Config.ARG_NAV_POSITION, navPosition);
-        getParentFragment().startActivityForResult(intent, Config.REQUEST_CODE);
+        startActivityForResult(intent, Config.REQUEST_CODE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

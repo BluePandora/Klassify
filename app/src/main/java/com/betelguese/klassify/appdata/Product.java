@@ -19,6 +19,24 @@ public class Product implements Parcelable {
     private double price;
     private final String noImage = "http://sustcse10.net/ashraful/emarket/product.jpg";
     private String phone;
+    private boolean isFavorite;
+
+    public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price, boolean isFavorite) {
+        if (images != null && images.size() != 0)
+            this.images = images;
+        else {
+            this.images = new ArrayList<>();
+            this.images.add(noImage);
+        }
+        this.title = title;
+        this.description = description;
+        this.productId = productId;
+        this.email = email;
+        this.createdDate = createdDate;
+        this.price = price;
+        this.phone = phone;
+        this.isFavorite = isFavorite;
+    }
 
     public Product(String productId, String title, String description, ArrayList<String> images, String phone, String email, String createdDate, double price) {
         if (images != null && images.size() != 0)
@@ -46,6 +64,11 @@ public class Product implements Parcelable {
         this.email = in.readString();
         this.createdDate = in.readString();
         this.price = in.readDouble();
+        this.isFavorite = in.readByte() != 0;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
     }
 
     @Override
@@ -63,6 +86,7 @@ public class Product implements Parcelable {
         dest.writeString(email);
         dest.writeString(createdDate);
         dest.writeDouble(price);
+        dest.writeByte((byte) (isFavorite ? 1 : 0));
     }
 
     public ArrayList<String> getImages() {
@@ -150,4 +174,8 @@ public class Product implements Parcelable {
             return new Product[size];
         }
     };
+
+    public void setFavorite(boolean favorite) {
+        this.isFavorite = favorite;
+    }
 }

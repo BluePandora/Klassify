@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import com.betelguese.klassify.json.ProductJson;
 import com.betelguese.klassify.utils.Config;
+import com.database.DatabaseOpenHelper;
 
 import java.util.ArrayList;
 
@@ -17,19 +18,29 @@ public class ProductManager extends AsyncTask<String, Void, Void> {
     private ArrayList<Product> categories;
     private ProductAdapter adapter;
     private int task;
+    private Context context;
+    private DatabaseOpenHelper db;
 
     public ProductManager(Context context, ProductAdapter adapter, int task) {
+        this.context = context;
         this.adapter = adapter;
         this.task = task;
         this.categories = new ArrayList<Product>();
+        if (task == Config.TASK_FAVORITE)
+            db = new DatabaseOpenHelper(context);
     }
 
     @Override
     protected Void doInBackground(String... url) {
         try {
-            ProductJson productJson = new ProductJson(url[0]);
-            categories = productJson.getProducts();
-            adapter.setPointer(productJson.getPointer());
+            if (task == Config.TASK_FAVORITE) {
+                if (db != null)
+                    categories = db.getAllfromFavTable();
+            } else {
+                ProductJson productJson = new ProductJson(context, url[0]);
+                categories = productJson.getProducts();
+                adapter.setPointer(productJson.getPointer());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

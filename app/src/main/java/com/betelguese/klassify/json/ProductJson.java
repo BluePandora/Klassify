@@ -1,6 +1,9 @@
 package com.betelguese.klassify.json;
 
+import android.content.Context;
+
 import com.betelguese.klassify.appdata.Product;
+import com.database.DatabaseOpenHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,8 +28,10 @@ public class ProductJson {
 
     private String link;
     private int pointer = -1;
+    private DatabaseOpenHelper db;
 
-    public ProductJson(String link) {
+    public ProductJson(Context context, String link) {
+        db = new DatabaseOpenHelper(context);
         this.link = link;
     }
 
@@ -48,7 +53,8 @@ public class ProductJson {
                     String email = getData(newsItem, EMAIL);
                     double price = Double.parseDouble(getData(newsItem, PRICE));
                     String createdDate = getData(newsItem, CREATED_DATE);
-                    news.add(new Product(id, title, description, image, phone, email, createdDate, price));
+                    boolean isFavorite = db.existInFavTable(id);
+                    news.add(new Product(id, title, description, image, phone, email, createdDate, price, isFavorite));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

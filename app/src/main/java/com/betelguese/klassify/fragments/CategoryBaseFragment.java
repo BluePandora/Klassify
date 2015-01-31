@@ -1,5 +1,6 @@
 package com.betelguese.klassify.fragments;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.betelguese.klassify.appdata.SubCategory;
 import com.betelguese.klassify.utils.Config;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -89,6 +91,20 @@ public class CategoryBaseFragment extends Fragment {
     @Override
     public void onConfigurationChanged(final Configuration config) {
         super.onConfigurationChanged(config);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        List<Fragment> fragments = getChildFragmentManager().getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment.getArguments().getInt(Config.ARG_POSITION) == data.getIntExtra(Config.ARG_NAV_POSITION, -1)) {
+                    fragment.onActivityResult(requestCode, resultCode, data);
+                }
+            }
+        }
     }
 
     @Override
