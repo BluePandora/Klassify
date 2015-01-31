@@ -33,9 +33,6 @@ import java.util.List;
 public class CategoryBaseFragment extends Fragment {
     private final String TAG = "Ashraful";
     private TabsAdapter mTabsAdapter;
-    private int mainTabLength;
-    private final String SAVE_POSITION = "position";
-    private final String SAVE_CATEGORY = "title";
     private int mPosition = -1;
     private PagerSlidingTabStrip tabs;
     private ViewPager pager;
@@ -68,29 +65,7 @@ public class CategoryBaseFragment extends Fragment {
             mTabsAdapter.addTab(subCategory.getTitle(), subCategory.getTitle(), BaseTabFragment.class, bundle);
         }
         pager.setCurrentItem(0);
-        if (save != null) {
-            try {
-                mPosition = save.getInt(SAVE_POSITION);
-                category = save.getParcelable(SAVE_CATEGORY);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
         return v;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mPosition != -1 && category != null) {
-            outState.putInt(SAVE_POSITION, mPosition);
-            outState.putParcelable(SAVE_CATEGORY, category);
-        }
-    }
-
-    @Override
-    public void onConfigurationChanged(final Configuration config) {
-        super.onConfigurationChanged(config);
     }
 
     @Override

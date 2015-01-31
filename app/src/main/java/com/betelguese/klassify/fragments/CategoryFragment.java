@@ -57,25 +57,10 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     public View onCreateView(LayoutInflater inflater, ViewGroup c, Bundle save) {
         View v = inflater.inflate(R.layout.category_layout, c, false);
         initView(v, save);
-        if (save != null) {
-            adapter.initMore();
-            ArrayList<Category> categories = save.getParcelableArrayList(SAVE_VALUE_KEY);
-            if (categories == null)
-                categories = new ArrayList<Category>();
-            adapter.setData(categories);
-            adapter.invalidate();
-        } else {
-            displayNews(Config.TASK_START);
-        }
+        displayNews(Config.TASK_START);
         return v;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (adapter != null)
-            outState.putParcelableArrayList(SAVE_VALUE_KEY, adapter.getData());
-    }
 
     private void initView(View v, Bundle save) {
         actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
@@ -113,11 +98,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         if (!adapter.mHasRequestedMore) {
             displayNews(Config.TASK_REFRESH);
         }
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -171,7 +151,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), CategoryHome.class);
         CategoryHome.categories = adapter.getData();
-        intent.putExtra(Config.ARG_POSITION,position);
+        intent.putExtra(Config.ARG_POSITION, position);
         startActivity(intent);
     }
 }
