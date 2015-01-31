@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\android\CWC_Simple_Project\library\src\main\assets"/></dataSet><dataSet config="debug"><source path="E:\android\CWC_Simple_Project\library\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/Flash/CWCProject/library/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/Flash/CWCProject/library/src/debug/assets"/></dataSet></merger>

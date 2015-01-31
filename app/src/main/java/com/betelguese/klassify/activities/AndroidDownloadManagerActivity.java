@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.betelguese.klassify.R;
 public class AndroidDownloadManagerActivity extends Activity {
     private long enqueue;
     private DownloadManager dm;
@@ -22,7 +23,7 @@ public class AndroidDownloadManagerActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.download_image);
 
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
@@ -58,7 +59,7 @@ public class AndroidDownloadManagerActivity extends Activity {
     public void onClick(View view) {
         dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         Request request = new Request(
-                Uri.parse("http://www.vogella.de/img/lars/LarsVogelArticle7.png"));
+                Uri.parse("http://sustcse10.net/ashraful/emarket/uploads/a.jpg"));
         enqueue = dm.enqueue(request);
 
     }

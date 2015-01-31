@@ -1,9 +1,12 @@
 package com.betelguese.klassify.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -100,4 +103,24 @@ public class ImageSliderActivity extends ActionBarActivity {
             handler.postDelayed(animateViewPager, ANIM_VIEWPAGER_DELAY);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.download, menu);
+        return  true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.download:
+                Intent i = new Intent(getApplicationContext(),AndroidDownloadManagerActivity.class);
+                startActivity(i);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+
 }

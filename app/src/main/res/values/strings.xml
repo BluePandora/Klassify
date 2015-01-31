@@ -68,4 +68,23 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
+
+    <!-- Facebook events -->
+    <string name="toast_facebook_auth_success">Facebook authentication is successful</string>
+    <string name="toast_facebook_auth_fail">Error was occurred during Facebook authentication</string>
+    <string name="facebook_post_published">Posted to Facebook successfully</string>
+    <string name="facebook_post_publishing_failed">Post publishing was failed</string>
+    <string name="facebook_logged_out">You are logged out</string>
+    <!-- Twitter events -->
+    <string name="toast_twitter_auth_success">Twitter authentication is successful</string>
+    <string name="toast_twitter_auth_fail">Error was occurred during Twitter authentication</string>
+    <string name="twitter_post_published">Tweeted successfully</string>
+    <string name="twitter_post_publishing_failed">Tweet failed</string>
+    <string name="twitter_logged_out">You are logged out</string>
+    <!-- Text and labels -->
+    <string name="menu_share_facebook">Share on Facebook</string>
+    <string name="menu_share_twitter">Share on Twitter</string>
+    <string name="title_activity_share">ShareActivity</string>
+    <string name="title_activity_sms">Share Via SMS</string>
+
 </resources>
