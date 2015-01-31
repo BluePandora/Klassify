@@ -19,6 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.betelguese.klassify.R;
+import com.betelguese.klassify.activities.Home;
+import com.betelguese.klassify.activities.SignUpActivity;
 import com.betelguese.klassify.activities.UpdateProfileActivity;
 import com.betelguese.klassify.appdata.AppController;
 import com.betelguese.klassify.connection.AlertDialogForAnything;
@@ -38,13 +40,13 @@ import java.util.regex.Pattern;
 /**
  * Created by tuman on 26/1/2015.
  */
-public class LogInFragment extends Fragment implements View.OnClickListener,Response.Listener<String> ,Response.ErrorListener {
+public class LogInFragment extends Fragment implements View.OnClickListener, Response.Listener<String>, Response.ErrorListener {
 
     ProgressDialog pDialog;
-    ConnectionDetector cd ;
+    ConnectionDetector cd;
 
     CustomEditText emailEd, passwordEd;
-    CustomButton loginB,forgetPassB,createAccountB;
+    CustomButton loginB, forgetPassB, createAccountB;
 
     private View rootView;
 
@@ -83,7 +85,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
     }
 
 
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -96,7 +97,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.login_button:
                 actionLoginButton();
                 break;
@@ -127,7 +128,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
         pDialog.setMessage("Progrssing...");
         pDialog.show();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, url, this , this ) {
+        StringRequest strReq = new StringRequest(Request.Method.POST, url, this, this) {
             @Override
             protected HashMap<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<String, String>();
@@ -145,7 +146,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
     }
 
     private void actionCreateAcountButton() {
-
+        Intent intent = new Intent(getActivity(), SignUpActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -154,14 +156,14 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
         try {
             UserInfo userInfo = AllJsonParser.loginJsonParser(new JSONObject(response));
 
-            if(userInfo != null){
+            if (userInfo != null) {
                 pDialog.hide();
                 Config.userInfo = userInfo;
 
-                Intent updateProfileIntent = new Intent(getActivity(), UpdateProfileActivity.class);
+                Intent updateProfileIntent = new Intent(getActivity(), Home.class);
                 startActivity(updateProfileIntent);
                 getActivity().finish();
-            }else{
+            } else {
                 pDialog.hide();
                 AlertDialogForAnything.showAlertDialogWhenComplte(getActivity(), "Fail", "Wrong Email address or Password.", false);
             }
@@ -171,8 +173,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
             pDialog.hide();
             Log.e("LognFragment", "Parsing Error");
         }
-
-
         pDialog.hide();
     }
 
@@ -199,7 +199,6 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
 
 
     private boolean matchPass(String passSt, String conPassSt) {
-        // TODO Auto-generated method stub
         if (passSt.equals(conPassSt)) {
             return true;
         }
@@ -210,7 +209,4 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
         Pattern pattern = Patterns.EMAIL_ADDRESS;
         return pattern.matcher(email).matches();
     }
-
-
-
 }

@@ -37,12 +37,12 @@ import java.util.regex.Pattern;
 /**
  * Created by tuman on 26/1/2015.
  */
-public class SignUpFragment extends Fragment implements  View.OnClickListener ,Response.Listener<String> ,Response.ErrorListener {
+public class SignUpFragment extends Fragment implements View.OnClickListener, Response.Listener<String>, Response.ErrorListener {
 
     ProgressDialog pDialog;
     ConnectionDetector cd;
-    CustomEditText fullNameEd,emailEd,mobileNumberEd,confirmPassEd,passwordEd;
-    CustomButton signUpB,fbSignupB,googleSignUpB;
+    CustomEditText fullNameEd, emailEd, mobileNumberEd, confirmPassEd, passwordEd;
+    CustomButton signUpB;
 
     private View rootView;
 
@@ -61,7 +61,6 @@ public class SignUpFragment extends Fragment implements  View.OnClickListener ,R
         addListener();
 
 
-
         return rootView;
     }
 
@@ -69,20 +68,15 @@ public class SignUpFragment extends Fragment implements  View.OnClickListener ,R
         cd = new ConnectionDetector(getActivity());
 
         fullNameEd = (CustomEditText) rootView.findViewById(R.id.fullNameEd);
-        emailEd  = (CustomEditText) rootView.findViewById(R.id.emailEd);
+        emailEd = (CustomEditText) rootView.findViewById(R.id.emailEd);
         mobileNumberEd = (CustomEditText) rootView.findViewById(R.id.mobileNumberEd);
         confirmPassEd = (CustomEditText) rootView.findViewById(R.id.confirmPassEd);
-        passwordEd  = (CustomEditText) rootView.findViewById(R.id.passwordEd);
-        signUpB  = (CustomButton) rootView.findViewById(R.id.sign_up_button);
-        fbSignupB  = (CustomButton) rootView.findViewById(R.id.facebook_button);
-        googleSignUpB  = (CustomButton) rootView.findViewById(R.id.google_plus_button);
+        passwordEd = (CustomEditText) rootView.findViewById(R.id.passwordEd);
+        signUpB = (CustomButton) rootView.findViewById(R.id.sign_up_button);
     }
 
     private void addListener() {
-
         signUpB.setOnClickListener(this);
-        fbSignupB.setOnClickListener(this);
-        googleSignUpB.setOnClickListener(this);
     }
 
     @Override
@@ -97,15 +91,9 @@ public class SignUpFragment extends Fragment implements  View.OnClickListener ,R
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.sign_up_button:
                 signUpButtonActivity();
-                break;
-            case R.id.facebook_button:
-                fbButtonActivity();
-                break;
-            case R.id.google_plus_button:
-                googleButtonActivity();
                 break;
         }
     }
@@ -129,7 +117,7 @@ public class SignUpFragment extends Fragment implements  View.OnClickListener ,R
         pDialog.setMessage("Progrssing...");
         pDialog.show();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST, url, this , this ) {
+        StringRequest strReq = new StringRequest(Request.Method.POST, url, this, this) {
             @Override
             protected HashMap<String, String> getParams() {
                 HashMap<String, String> params = new HashMap<String, String>();
@@ -178,22 +166,17 @@ public class SignUpFragment extends Fragment implements  View.OnClickListener ,R
 
                 Toast.makeText(getActivity(), "success", Toast.LENGTH_SHORT).show();
                 pDialog.hide();
-                /*Intent intent = new Intent(this, LogInActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);*/
+                getActivity().finish();
             } else {
                 AlertDialogForAnything.showAlertDialogWhenComplte(getActivity(), "Fail", "Fail to sign up.", false);
                 pDialog.hide();
 
             }
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
         pDialog.hide();
     }
-
 
 
     public boolean showWarningDialog() {
@@ -203,10 +186,10 @@ public class SignUpFragment extends Fragment implements  View.OnClickListener ,R
         } else if (emailEd.getText().toString().isEmpty()) {
             AlertDialogForAnything.showAlertDialogWhenComplte(getActivity(), "Warning", "Email  can't be Empty", false);
 
-        }  else if (mobileNumberEd.getText().toString().isEmpty()) {
+        } else if (mobileNumberEd.getText().toString().isEmpty()) {
             AlertDialogForAnything.showAlertDialogWhenComplte(getActivity(), "Warning", "Mobile Number  can't be Empty", false);
 
-        }else if (passwordEd.getText().toString().isEmpty()) {
+        } else if (passwordEd.getText().toString().isEmpty()) {
             AlertDialogForAnything.showAlertDialogWhenComplte(getActivity(), "Warning", "Password  can't be Empty", false);
 
         } else if (confirmPassEd.getText().toString().isEmpty()) {

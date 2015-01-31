@@ -53,6 +53,22 @@ public class Category implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(title);
-        dest.writeTypedList(subCategories);
+        dest.writeList(subCategories);
     }
+
+    public Category(Parcel in) {
+        this.id = in.readString();
+        this.title = in.readString();
+        this.subCategories = in.readArrayList(null);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
 }

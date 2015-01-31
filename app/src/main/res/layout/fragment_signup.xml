@@ -68,6 +68,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:inputType="textWebPassword"
                     android:background="@drawable/abc_edit_text_material"
                     android:textColor="@color/Primary_Black"
                     android:hint="Password" />
@@ -77,6 +78,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:inputType="textWebPassword"
                     android:background="@drawable/abc_edit_text_material"
                     android:textColor="@color/Primary_Black"
                     android:hint="Confirm Password" />
@@ -91,47 +93,6 @@
                 android:text="SiGN UP"
                 android:textColor="#FaFaFa" />
 
-            <com.widget.CustomTextView
-                android:id="@+id/dummy_text"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sign_up_button"
-                android:layout_margin="5dip"
-                android:gravity="center"
-                android:text="OR YOU CAN SIGN UP WITH"
-                android:textColor="#2a2a2a"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dummy_text"
-                android:orientation="horizontal">
-
-                <com.widget.CustomButton
-                    android:id="@+id/facebook_button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/info_layout"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/facebook_button"
-                    android:padding="10dp"
-                    android:text="FACEBOOK"
-                    android:textColor="#FAFAFA" />
-
-                <com.widget.CustomButton
-                    android:id="@+id/google_plus_button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/info_layout"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/google_plus_button"
-                    android:padding="10dp"
-                    android:text="GOOGLE+"
-                    android:textColor="#FAFAFA" />
-            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

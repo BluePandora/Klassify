@@ -107,14 +107,15 @@ public class ImageSliderActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.download, menu);
-        return  true;
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.download:
-                Intent i = new Intent(getApplicationContext(),AndroidDownloadManagerActivity.class);
+                Intent i = new Intent(getApplicationContext(), AndroidDownloadManagerActivity.class);
+                i.putExtra(Config.ARG_IMAGES, images.get(viewPager.getCurrentItem()));
                 startActivity(i);
                 return true;
             default:

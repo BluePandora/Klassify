@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.betelguese.klassify.R;
+import com.betelguese.klassify.utils.Config;
 
 public class AndroidDownloadManagerActivity extends Activity {
     private long enqueue;
@@ -61,10 +62,8 @@ public class AndroidDownloadManagerActivity extends Activity {
 
     public void onClick(View view) {
         dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        Request request = new Request(
-                Uri.parse("http://sustcse10.net/ashraful/emarket/uploads/a.jpg"));
+        Request request = new Request(Uri.parse(getIntent().getStringExtra(Config.ARG_IMAGES)));
         enqueue = dm.enqueue(request);
-
     }
 
     public void showDownload(View view) {

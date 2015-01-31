@@ -36,11 +36,11 @@
     </string-array>
 
     <string-array name="tab_array">
-        <item>Category,Home,Latest,Trending</item>
-        <item>Category,Home,Latest,Trending</item>
-        <item>Category,Home,Latest,Trending</item>
-        <item>Category,Home,Latest,Trending</item>
-        <item>Category,Home,Latest,Trending</item>
+        <item>Category,Home,Editors,Trending</item>
+        <item>Category,Home,Editors,Trending</item>
+        <item>Category,Home,Editors,Trending</item>
+        <item>Category,Home,Editors,Trending</item>
+        <item>Category,Home,Editors,Trending</item>
     </string-array>
     <string-array name="tag_array">
         <item>http://www.mocky.io/v2/54cc1d3196d6b2091a431fd5,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd,http://www.mocky.io/v2/54cc07c696d6b24218431fcd</item>

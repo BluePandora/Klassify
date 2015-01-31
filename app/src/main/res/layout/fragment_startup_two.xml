@@ -15,6 +15,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="180dp"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:background="#5500bbd2">
 
@@ -94,6 +95,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="Google+"
                 android:textColor="#FAFAFA"
                 android:textSize="20dp"

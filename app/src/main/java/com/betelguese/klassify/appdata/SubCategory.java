@@ -55,4 +55,20 @@ public class SubCategory implements Parcelable {
         dest.writeString(title);
         dest.writeStringList(fields);
     }
+
+    public SubCategory(Parcel in) {
+        this.id = in.readString();
+        this.title = in.readString();
+        this.fields = in.readArrayList(null);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        public SubCategory[] newArray(int size) {
+            return new SubCategory[size];
+        }
+    };
 }
