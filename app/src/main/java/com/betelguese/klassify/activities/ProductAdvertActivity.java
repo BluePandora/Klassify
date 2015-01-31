@@ -3,6 +3,7 @@ package com.betelguese.klassify.activities;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -11,17 +12,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.betelguese.klassify.R;
+import com.betelguese.klassify.appdata.Category;
 import com.betelguese.klassify.appdata.CategorySpinnerAdapter;
 import com.betelguese.klassify.appdata.CategorySpinnerManager;
+import com.betelguese.klassify.appdata.FieldsAdapter;
+import com.betelguese.klassify.appdata.SubCategory;
+import com.betelguese.klassify.appdata.SubCategorySpinnerAdapter;
 import com.widget.CustomButton;
 import com.widget.CustomEditText;
 
 import org.json.JSONObject;
 
-public class ProductAdvertActivity extends ActionBarActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class ProductAdvertActivity extends ActionBarActivity implements Response.Listener<JSONObject>, Response.ErrorListener, AdapterView.OnItemSelectedListener {
 
     private JsonObjectRequest mJsonObjectRequest;
-    CategorySpinnerAdapter adapter;
+    private CategorySpinnerAdapter adapter;
+    private SubCategorySpinnerAdapter subAdapter;
+    private FieldsAdapter fieldsAdapter;
     private RelativeLayout addProductImage;
     private ImageView singleProductImage;
     private Spinner catagorySpinner;
@@ -40,7 +47,7 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
         setContentView(R.layout.product_add);
         init();
         initListeners();
-        getCatagories(null);
+        getCatagories("http://www.mocky.io/v2/54cc1d3196d6b2091a431fd5");
     }
 
     private void getCatagories(String tag) {
@@ -64,8 +71,31 @@ public class ProductAdvertActivity extends ActionBarActivity implements Response
         addProductImage = (RelativeLayout) findViewById(R.id.add_image);
         singleProductImage = (ImageView) findViewById(R.id.product_image);
         addProductButton = (CustomButton) findViewById(R.id.add_product_button);
-        adapter = new CategorySpinnerAdapter();
+        adapter = new CategorySpinnerAdapter(this);
+        subAdapter = new SubCategorySpinnerAdapter(this);
+        fieldsAdapter = new FieldsAdapter(this);
         catagorySpinner.setAdapter(adapter);
+        subCatagorySpinner.setAdapter(subAdapter);
+        catagorySpinner.setOnItemSelectedListener(this);
+        subCatagorySpinner.setOnItemSelectedListener(this);
+        FieldsSpinner.setAdapter(fieldsAdapter);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (parent.equals(catagorySpinner)) {
+            subAdapter.setData(((Category) ((CategorySpinnerAdapter) parent.getAdapter()).getItem(position)).getSubCategories());
+            fieldsAdapter.setData(((SubCategory) subCatagorySpinner.getAdapter().getItem(subCatagorySpinner.getSelectedItemPosition()==-1?0:subCatagorySpinner.getSelectedItemPosition())).getFields());
+        }
+        if (parent.equals(subCatagorySpinner)) {
+            fieldsAdapter.setData(((SubCategory) ((SubCategorySpinnerAdapter) parent.getAdapter()).getItem(position)).getFields());
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class ViewListeners implements View.OnClickListener {

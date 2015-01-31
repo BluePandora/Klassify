@@ -12,13 +12,13 @@ import com.widget.CustomTextView;
 
 import java.util.ArrayList;
 
-public class CategorySpinnerAdapter extends BaseAdapter {
+public class FieldsAdapter extends BaseAdapter {
 
-    private ArrayList<Category> list;
+    private ArrayList<String> list;
     private Activity activity;
     private LayoutInflater inflater;
 
-    public CategorySpinnerAdapter(Activity activity) {
+    public FieldsAdapter(Activity activity) {
         this.activity = activity;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         list = new ArrayList<>();
@@ -51,8 +51,8 @@ public class CategorySpinnerAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        Category category = list.get(position);
-        viewHolder.categoryName.setText(category.getTitle());
+        String category = list.get(position);
+        viewHolder.categoryName.setText(category);
         return convertView;
     }
 
@@ -60,7 +60,7 @@ public class CategorySpinnerAdapter extends BaseAdapter {
         CustomTextView categoryName;
     }
 
-    public void setData(ArrayList<Category> list) {
+    public void setData(ArrayList<String> list) {
         this.list = list;
         this.notifyDataSetChanged();
     }

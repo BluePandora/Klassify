@@ -35,11 +35,7 @@
                 android:name="android.app.default_searchable"
                 android:value="com.betelguese.klassify.activities.ProductListActivity" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activities.CategoryHome"
@@ -81,6 +77,19 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_image_slider"
             android:theme="@style/MyFullscreenTheme" />
+
+        <activity
+            android:name=".activities.ProductAdvertActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/ProductDetailsTheme" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            </activity>
+
     </application>
 
 </manifest>
