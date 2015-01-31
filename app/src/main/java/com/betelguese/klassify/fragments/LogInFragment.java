@@ -2,6 +2,7 @@ package com.betelguese.klassify.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,11 +19,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.betelguese.klassify.R;
+import com.betelguese.klassify.activities.UpdateProfileActivity;
 import com.betelguese.klassify.appdata.AppController;
 import com.betelguese.klassify.connection.AlertDialogForAnything;
 import com.betelguese.klassify.connection.AllJsonParser;
 import com.betelguese.klassify.connection.ConnectionDetector;
 import com.betelguese.klassify.model.UserInfo;
+import com.betelguese.klassify.utils.Config;
 import com.widget.CustomButton;
 import com.widget.CustomEditText;
 
@@ -150,8 +153,14 @@ public class LogInFragment extends Fragment implements View.OnClickListener,Resp
         Log.d("data face", response.toString());
         try {
             UserInfo userInfo = AllJsonParser.loginJsonParser(new JSONObject(response));
+
             if(userInfo != null){
                 pDialog.hide();
+                Config.userInfo = userInfo;
+
+                Intent updateProfileIntent = new Intent(getActivity(), UpdateProfileActivity.class);
+                startActivity(updateProfileIntent);
+                getActivity().finish();
             }else{
                 pDialog.hide();
                 AlertDialogForAnything.showAlertDialogWhenComplte(getActivity(), "Fail", "Wrong Email address or Password.", false);

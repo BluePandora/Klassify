@@ -33,10 +33,11 @@
                     <com.widget.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="First Name"
+                        android:text="Full Name"
                         app:font="RobotoCondensed-Bold.ttf" />
 
                     <com.widget.CustomTextView
+                        android:id="@+id/fullNameTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dummy"
@@ -44,30 +45,11 @@
                         app:font="RobotoCondensed-Regular.ttf" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="15dp">
 
-                    <com.widget.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Last Name"
-                        android:textSize="14sp"
-                        app:font="RobotoCondensed-Bold.ttf" />
-
-                    <com.widget.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Boy"
-                        android:textSize="20sp"
-                        app:font="RobotoCondensed-Regular.ttf" />
-                </LinearLayout>
             </LinearLayout>
 
             <ImageButton
+                android:id="@+id/updateFullNameB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -117,6 +99,7 @@
                         app:font="RobotoCondensed-Bold.ttf" />
 
                     <com.widget.CustomTextView
+                        android:id="@+id/emailTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dummy"
@@ -138,7 +121,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="20dp">
+            <ImageButton
+                android:id="@+id/updateMobileNumB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/flat_button"
+                android:gravity="right"
+                android:padding="5dp"
 
+                android:src="@drawable/ic_create_24dp" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,6 +157,7 @@
                         app:font="RobotoCondensed-Bold.ttf" />
 
                     <com.widget.CustomTextView
+                        android:id="@+id/mobileNumberTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="01680842208"
@@ -214,6 +207,7 @@
                         app:font="RobotoCondensed-Bold.ttf" />
 
                     <com.widget.CustomTextView
+                        android:id="@+id/dateOfCreationTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="30-12-2014"
@@ -234,7 +228,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="20dp">
+            <ImageButton
+                android:id="@+id/updateLocationB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/flat_button"
+                android:gravity="right"
+                android:padding="5dp"
 
+                android:src="@drawable/ic_create_24dp" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -262,6 +265,7 @@
                         app:font="RobotoCondensed-Bold.ttf" />
 
                     <com.widget.CustomTextView
+                        android:id="@+id/locationTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dummy Location"

@@ -1,5 +1,7 @@
 package com.betelguese.klassify.utils;
 
+import com.betelguese.klassify.model.UserInfo;
+
 /**
  * Md.Ashraful Islam Reg No. 2010331035 Computer Science and Engineering
  * Shahjalal University of Science and Technology,Sylhet
@@ -13,10 +15,7 @@ public class Config {
     public static final int TASK_REFRESH = 1;
     public static final int TASK_MORE = 2;
 
-    public static String TABLE_FAVOURITE = "favourite";
-    public static String TABLE_IMAGES = "images";
-    public static String FavTableItem[] = { "productId","title","description","images","email","createdDate","price" };
-    public static String ImageItem[] = { "image_id","imageUrl" };
+    public static UserInfo userInfo = null;
 
 
 }
